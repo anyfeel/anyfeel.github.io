@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="常用 tcpdump 参数解析 -i 指定网卡，一般不清楚网卡设置直接使用 “any” 表示抓取所有网卡 -A 使用 ASCII 码打印收到的每个包- -X 同时以十六进制和 ASCII 打印包  常用抓包实例1234567891011# host 和 port 过滤tcpdump -i any -Ans 0 &amp;apos;src host 1.1.1.1 &amp;amp;&amp;amp; dst host">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix tcpdump 使用技巧">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/tcpdump-using-skill/index.html">
+<meta property="og:site_name" content="冰澜">
+<meta property="og:description" content="常用 tcpdump 参数解析 -i 指定网卡，一般不清楚网卡设置直接使用 “any” 表示抓取所有网卡 -A 使用 ASCII 码打印收到的每个包- -X 同时以十六进制和 ASCII 打印包  常用抓包实例1234567891011# host 和 port 过滤tcpdump -i any -Ans 0 &amp;apos;src host 1.1.1.1 &amp;amp;&amp;amp; dst host">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-23T01:30:22.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unix tcpdump 使用技巧">
+<meta name="twitter:description" content="常用 tcpdump 参数解析 -i 指定网卡，一般不清楚网卡设置直接使用 “any” 表示抓取所有网卡 -A 使用 ASCII 码打印收到的每个包- -X 同时以十六进制和 ASCII 打印包  常用抓包实例1234567891011# host 和 port 过滤tcpdump -i any -Ans 0 &amp;apos;src host 1.1.1.1 &amp;amp;&amp;amp; dst host">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/18/tcpdump-using-skill/"/>
+
+
+
+
+
+  <title>Unix tcpdump 使用技巧 | 冰澜</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c5c5f17b527b0bd7281467d5fd5fa8c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">冰澜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/tcpdump-using-skill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unix tcpdump 使用技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T21:46:18+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/18/tcpdump-using-skill/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/18/tcpdump-using-skill/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="常用-tcpdump-参数解析"><a href="#常用-tcpdump-参数解析" class="headerlink" title="常用 tcpdump 参数解析"></a>常用 tcpdump 参数解析</h2><ul>
+<li>-i 指定网卡，一般不清楚网卡设置直接使用 “any” 表示抓取所有网卡</li>
+<li>-A 使用 ASCII 码打印收到的每个包<br>- -X 同时以十六进制和 ASCII 打印包</li>
+</ul>
+<h2 id="常用抓包实例"><a href="#常用抓包实例" class="headerlink" title="常用抓包实例"></a>常用抓包实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># host 和 port 过滤</span><br><span class="line">tcpdump -i any -Ans 0 &apos;src host 1.1.1.1 &amp;&amp; dst host 2.2.2. &amp;&amp; dst port 3100&apos;</span><br><span class="line"></span><br><span class="line"># GET</span><br><span class="line">tcpdump -i eth1 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420&apos;</span><br><span class="line"></span><br><span class="line"># POST</span><br><span class="line">tcpdump -i eth1 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x504f5354&apos;</span><br><span class="line"></span><br><span class="line"># TCP 标志位</span><br><span class="line">tcpdump -i any -Ans 0 &apos;host 183.214.154.4 &amp;&amp; tcp[tcpflags]=tcp-syn&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="tcpdump-过滤器"><a href="#tcpdump-过滤器" class="headerlink" title="tcpdump 过滤器"></a>tcpdump 过滤器</h2><h3 id="目标语法-dst-和-src-表示来源和目的地"><a href="#目标语法-dst-和-src-表示来源和目的地" class="headerlink" title="目标语法 dst 和 src 表示来源和目的地"></a>目标语法 <code>dst</code> 和 <code>src</code> 表示来源和目的地</h3><p>eg: src host and dst port</p>
+<h3 id="逻辑语法-and、or-and-not"><a href="#逻辑语法-and、or-and-not" class="headerlink" title="逻辑语法 and、or and not"></a>逻辑语法 <code>and</code>、<code>or</code> and <code>not</code></h3><p>eg: src host1 or src host2</p>
+<h3 id="包内容过滤"><a href="#包内容过滤" class="headerlink" title="包内容过滤"></a>包内容过滤</h3><p>proto[x:y] 过滤从x字节开始的y字节数。比如ip[2:2]过滤出3、4字节（第一字节从0开始排</p>
+<p>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420</span><br><span class="line">tcp[12]&gt;&gt;4&lt;&lt;2 == tcp[12]&gt;&gt;22</span><br><span class="line">tcp[12]&gt;&gt;4 拿到 13 字节的 高 4 位，</span><br><span class="line">&gt;&gt;2相当于除以 4(32/8)，即偏移的 8 bits 位数</span><br></pre></td></tr></table></figure></p>
+<h3 id="标志位过滤"><a href="#标志位过滤" class="headerlink" title="标志位过滤"></a>标志位过滤</h3><p>tcp[tcpflags]=tcp-syn</p>
+<h2 id="TCP-Header-Format"><a href="#TCP-Header-Format" class="headerlink" title="TCP Header Format"></a>TCP Header Format</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   0                   1                   2                   3</span><br><span class="line">   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |          Source Port          |       Destination Port        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                        Sequence Number                        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                    Acknowledgment Number                      |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |  Data |           |U|A|P|R|S|F|                               |</span><br><span class="line">  | Offset| Reserved  |R|C|S|S|Y|I|            Window             |</span><br><span class="line">  |       |           |G|K|H|T|N|N|                               |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |           Checksum            |         Urgent Pointer        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                    Options                    |    Padding    |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                             data                              |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line"></span><br><span class="line">Data Offset:  4 bits</span><br><span class="line"></span><br><span class="line">   The number of ```32 bit words``` in the TCP Header.  This indicates where</span><br><span class="line">   the data begins.  The TCP header (even one including options) is an</span><br><span class="line">   integral number of 32 bits long.</span><br></pre></td></tr></table></figure>
+<h2 id="IP-format"><a href="#IP-format" class="headerlink" title="IP format"></a>IP format</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|Version|  IHL  |Type of Service|          Total Length         |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|         Identification        |Flags|      Fragment Offset    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|  Time to Live |    Protocol   |         Header Checksum       |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                       Source Address                          |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                    Destination Address                        |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                    Options                    |    Padding    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/" rel="next" title="使用 pprof 和 Flame-Graph 调试 Golang 应用">
+                <i class="fa fa-chevron-left"></i> 使用 pprof 和 Flame-Graph 调试 Golang 应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/19/load-balance-algorithm/" rel="prev" title="Nginx 基于权重的平滑轮询算法">
+                Nginx 基于权重的平滑轮询算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/03/18/tcpdump-using-skill/"
+           data-title="Unix tcpdump 使用技巧" data-url="http://yoursite.com/2018/03/18/tcpdump-using-skill/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="anyfeel" />
+            
+              <p class="site-author-name" itemprop="name">anyfeel</p>
+              <p class="site-description motion-element" itemprop="description">我就是我，是颜色不一样的烟花</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用-tcpdump-参数解析"><span class="nav-number">1.</span> <span class="nav-text">常用 tcpdump 参数解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用抓包实例"><span class="nav-number">2.</span> <span class="nav-text">常用抓包实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcpdump-过滤器"><span class="nav-number">3.</span> <span class="nav-text">tcpdump 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标语法-dst-和-src-表示来源和目的地"><span class="nav-number">3.1.</span> <span class="nav-text">目标语法 dst 和 src 表示来源和目的地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑语法-and、or-and-not"><span class="nav-number">3.2.</span> <span class="nav-text">逻辑语法 and、or and not</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包内容过滤"><span class="nav-number">3.3.</span> <span class="nav-text">包内容过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标志位过滤"><span class="nav-number">3.4.</span> <span class="nav-text">标志位过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-Header-Format"><span class="nav-number">4.</span> <span class="nav-text">TCP Header Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-format"><span class="nav-number">5.</span> <span class="nav-text">IP format</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">anyfeel</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"anyfeel-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
