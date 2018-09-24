@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="print all system information1uname -a kernel version:1uname -r see hardware info.1cat /proc/meminfo cat /proc/cpuinfo count line1find . -name &amp;apos;\*.c&amp;apos; | xargs wc -l &amp;#123;&amp;#125;\; yum remove w">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 命令助记">
+<meta property="og:url" content="http://yoursite.com/2018/09/24/linux-command-note/index.html">
+<meta property="og:site_name" content="冰澜">
+<meta property="og:description" content="print all system information1uname -a kernel version:1uname -r see hardware info.1cat /proc/meminfo cat /proc/cpuinfo count line1find . -name &amp;apos;\*.c&amp;apos; | xargs wc -l &amp;#123;&amp;#125;\; yum remove w">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-24T04:49:50.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux 命令助记">
+<meta name="twitter:description" content="print all system information1uname -a kernel version:1uname -r see hardware info.1cat /proc/meminfo cat /proc/cpuinfo count line1find . -name &amp;apos;\*.c&amp;apos; | xargs wc -l &amp;#123;&amp;#125;\; yum remove w">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/24/linux-command-note/"/>
+
+
+
+
+
+  <title>linux 命令助记 | 冰澜</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c5c5f17b527b0bd7281467d5fd5fa8c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">冰澜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/linux-command-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux 命令助记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T11:02:31+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/24/linux-command-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/linux-command-note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="print-all-system-information"><a href="#print-all-system-information" class="headerlink" title="print all system information"></a>print all system information</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+<h3 id="kernel-version"><a href="#kernel-version" class="headerlink" title="kernel version:"></a>kernel version:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+<h3 id="see-hardware-info"><a href="#see-hardware-info" class="headerlink" title="see hardware info."></a>see hardware info.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+<h3 id="count-line"><a href="#count-line" class="headerlink" title="count line"></a>count line</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &apos;\*.c&apos; | xargs wc -l &#123;&#125;\;</span><br></pre></td></tr></table></figure>
+<h3 id="yum-remove-without-dependency"><a href="#yum-remove-without-dependency" class="headerlink" title="yum remove without dependency"></a>yum remove without dependency</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -e --nodeps vim-common-7.4.160-1.el7.x86_64</span><br></pre></td></tr></table></figure>
+<h3 id="fio-test"><a href="#fio-test" class="headerlink" title="fio test"></a>fio test</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/local/bin/fio --filename=/dev/sda --direct=1 --rw=randrw --refill_buffers --norandommap --randrepeat=0 --ioengine=libaio --bs=4k --rwmixread=100 --iodepth=16 --numjobs=16 --runtime=1000 --group_reporting --name=4ktest</span><br></pre></td></tr></table></figure>
+<h3 id="docker-expose-port-to-host-machine"><a href="#docker-expose-port-to-host-machine" class="headerlink" title="docker expose port to host machine"></a>docker expose port to host machine</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:3000 my-image</span><br></pre></td></tr></table></figure>
+<h3 id="docker-get-running-container-bash-cmd"><a href="#docker-get-running-container-bash-cmd" class="headerlink" title="docker get running container bash cmd"></a>docker get running container bash cmd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker  exec -it contained  bash</span><br></pre></td></tr></table></figure>
+<h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any port 9200  -w o.pcap</span><br></pre></td></tr></table></figure>
+<h3 id="批量结束进程"><a href="#批量结束进程" class="headerlink" title="批量结束进程"></a>批量结束进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `ps -ef|grep nginx|grep -v grep |awk &apos;&#123;print $2&#125;&apos;`</span><br></pre></td></tr></table></figure>
+<h3 id="查看进程占用端口"><a href="#查看进程占用端口" class="headerlink" title="查看进程占用端口"></a>查看进程占用端口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep processname</span><br><span class="line">netstat -nap | grep pid</span><br><span class="line"></span><br><span class="line">lsof -i:9090</span><br><span class="line">pwdx 9090</span><br><span class="line">lsof -P 9090 | grep cwd</span><br></pre></td></tr></table></figure>
+<h3 id="vim-replace"><a href="#vim-replace" class="headerlink" title="vim replace"></a>vim replace</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:  %s/\(randrecord\.get(&apos;ip&apos;)\)/ptest\.\1/g</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将文件中的所有 randrecord.get(‘ip’)  替换为 test.randrecord.get(‘ip’)，即使用 \1  \2 等可以匹配前面第几个括号内的内容，此括号需要使用 反斜杠 转意</p>
+</blockquote>
+<h3 id="查看-glibc-版本"><a href="#查看-glibc-版本" class="headerlink" title="查看 glibc 版本"></a>查看 glibc 版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /lib64/libc.so.6 |grep GLIBC</span><br></pre></td></tr></table></figure>
+<h3 id="linux-将标出输出重定向到-dev-null"><a href="#linux-将标出输出重定向到-dev-null" class="headerlink" title="linux 将标出输出重定向到 /dev/null"></a>linux 将标出输出重定向到 /dev/null</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2&gt;&amp; 1</span><br></pre></td></tr></table></figure>
+<h3 id="awk-打印奇偶行"><a href="#awk-打印奇偶行" class="headerlink" title="awk 打印奇偶行"></a>awk 打印奇偶行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $0 &gt; NR%2&#125;&apos;  file</span><br></pre></td></tr></table></figure>
+<h3 id="sort-by-frequence"><a href="#sort-by-frequence" class="headerlink" title="sort by frequence"></a>sort by frequence</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat tmp.txt| sort | uniq -c | sort -k1,1nr  | head -30 &gt; stoplist.txt</span><br></pre></td></tr></table></figure>
+<h3 id="filter-by-stoplist"><a href="#filter-by-stoplist" class="headerlink" title="filter by stoplist"></a>filter by stoplist</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tr &apos; &apos; &apos;\n&apos; &lt; stoplist.txt | grep -vwFf - tmp.txt</span><br></pre></td></tr></table></figure>
+<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep zicogo | awk &apos;BEGIN&#123;sum=&quot;&quot;&#125;&#123;sum=($2&quot;,&quot;sum)&#125;END&#123;print sum&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="按组统计求和"><a href="#按组统计求和" class="headerlink" title="按组统计求和"></a>按组统计求和</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;s[$1] += $2; a[$1] += $3 &#125;END&#123; for(i in s)&#123;  printf &quot;%-50s %-20d %-20d\n&quot;, i,s[i],a[i] &#125; &#125;&apos; upstats-2017-07-05-15-05.log+</span><br></pre></td></tr></table></figure>
+<p>###<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/_io.so /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/_io.so</span><br></pre></td></tr></table></figure></p>
+<p>###<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldconfig -p | grep libssl</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除-archlinux-软件包"><a href="#删除-archlinux-软件包" class="headerlink" title="删除 archlinux 软件包"></a>删除 archlinux 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Scc</span><br></pre></td></tr></table></figure>
+<h3 id="history-clean"><a href="#history-clean" class="headerlink" title="history clean"></a>history clean</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .zsh_history  |  awk &apos;BEGIN&#123;FS=&quot;&quot;&#125;&#123;if (NF &gt; 40 ) print ;&#125;&apos; &gt;&gt; .zsh_history_new</span><br></pre></td></tr></table></figure>
+<h3 id="brew-install"><a href="#brew-install" class="headerlink" title="brew install"></a>brew install</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-lua --with-override-system-vi  --build-from-source</span><br></pre></td></tr></table></figure>
+<h4 id="global-floder-sed"><a href="#global-floder-sed" class="headerlink" title="global floder sed"></a>global floder sed</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/TINY/NOX/g&quot; `grep -R TINY -rl ./`</span><br></pre></td></tr></table></figure>
+<h4 id="批量查找替换"><a href="#批量查找替换" class="headerlink" title="批量查找替换"></a>批量查找替换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find CHANGELOG.md -type f -exec vim +&quot;retab | wq&quot; &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h4 id="查看用户所属组"><a href="#查看用户所属组" class="headerlink" title="查看用户所属组"></a>查看用户所属组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id -g -n $whoami</span><br></pre></td></tr></table></figure>
+<h4 id="列出-osx-系统的-java-版本"><a href="#列出-osx-系统的-java-版本" class="headerlink" title="列出 osx 系统的 java 版本"></a>列出 osx 系统的 java 版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/java_home -V</span><br></pre></td></tr></table></figure>
+<h4 id="列出-java-的信任证书"><a href="#列出-java-的信任证书" class="headerlink" title="列出 java 的信任证书"></a>列出 java 的信任证书</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/security/cacerts</span><br></pre></td></tr></table></figure>
+<h4 id="java-导入证书"><a href="#java-导入证书" class="headerlink" title="java 导入证书"></a>java 导入证书</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -import -trustcacerts -file [certificate] -alias [alias] -keystore $JAVA_HOME/lib/security/cacerts</span><br></pre></td></tr></table></figure>
+<h3 id="vim-highlight"><a href="#vim-highlight" class="headerlink" title="vim highlight"></a>vim highlight</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:so $VIMRUNTIME/syntax/hitest.vim</span><br></pre></td></tr></table></figure>
+<h3 id="check-cpu-info"><a href="#check-cpu-info" class="headerlink" title="check cpu info"></a>check cpu info</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo dmidecode -t 4 | grep -E &apos;Socket Designation|Count&apos;</span><br><span class="line">    Socket Designation: CPU1</span><br><span class="line">    Core Count: 8</span><br><span class="line">    Thread Count: 16</span><br><span class="line">    Socket Designation: CPU2</span><br><span class="line">    Core Count: 8</span><br><span class="line">    Thread Count: 16</span><br><span class="line"></span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+<h3 id="awk-和-grep-日志统计分析"><a href="#awk-和-grep-日志统计分析" class="headerlink" title="awk 和 grep 日志统计分析"></a>awk 和 grep 日志统计分析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat nginx/logs/access.log  |   grep &quot;17/Sep&quot;  | grep -v &apos;2\.43&apos; | awk  &apos;&#123;if ($11 &gt; 1) print $0&#125;&apos;</span><br><span class="line">cat nginx/logs/access.log  |   grep &quot;17/Sep&quot; | grep -v &apos;2\.43&apos; | awk  &apos;BEGIN&#123;a=0&#125;&#123;if ($11&gt;0+a) a=$11&#125; END&#123;print a&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="centos-查看某个库是哪个-package-提供的"><a href="#centos-查看某个库是哪个-package-提供的" class="headerlink" title="centos 查看某个库是哪个 package 提供的"></a>centos 查看某个库是哪个 package 提供的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum whatprovides libpci.so.3</span><br></pre></td></tr></table></figure>
+<h3 id="查看-PPID"><a href="#查看-PPID" class="headerlink" title="查看 PPID"></a>查看 PPID</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -&gt; G -&gt; 2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/24/updns-qps-tracing/" rel="next" title="updns QPS 异常问题排查">
+                <i class="fa fa-chevron-left"></i> updns QPS 异常问题排查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/24/linux-system-profile-command/" rel="prev" title="Linux 系统优化指令杂记">
+                Linux 系统优化指令杂记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/09/24/linux-command-note/"
+           data-title="linux 命令助记" data-url="http://yoursite.com/2018/09/24/linux-command-note/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="anyfeel" />
+            
+              <p class="site-author-name" itemprop="name">anyfeel</p>
+              <p class="site-description motion-element" itemprop="description">我就是我，是颜色不一样的烟花</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#print-all-system-information"><span class="nav-number">1.</span> <span class="nav-text">print all system information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kernel-version"><span class="nav-number">2.</span> <span class="nav-text">kernel version:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#see-hardware-info"><span class="nav-number">3.</span> <span class="nav-text">see hardware info.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-line"><span class="nav-number">4.</span> <span class="nav-text">count line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum-remove-without-dependency"><span class="nav-number">5.</span> <span class="nav-text">yum remove without dependency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fio-test"><span class="nav-number">6.</span> <span class="nav-text">fio test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-expose-port-to-host-machine"><span class="nav-number">7.</span> <span class="nav-text">docker expose port to host machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-get-running-container-bash-cmd"><span class="nav-number">8.</span> <span class="nav-text">docker get running container bash cmd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcpdump"><span class="nav-number">9.</span> <span class="nav-text">tcpdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量结束进程"><span class="nav-number">10.</span> <span class="nav-text">批量结束进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看进程占用端口"><span class="nav-number">11.</span> <span class="nav-text">查看进程占用端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-replace"><span class="nav-number">12.</span> <span class="nav-text">vim replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-glibc-版本"><span class="nav-number">13.</span> <span class="nav-text">查看 glibc 版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-将标出输出重定向到-dev-null"><span class="nav-number">14.</span> <span class="nav-text">linux 将标出输出重定向到 /dev/null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk-打印奇偶行"><span class="nav-number">15.</span> <span class="nav-text">awk 打印奇偶行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-by-frequence"><span class="nav-number">16.</span> <span class="nav-text">sort by frequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-by-stoplist"><span class="nav-number">17.</span> <span class="nav-text">filter by stoplist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串拼接"><span class="nav-number">18.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按组统计求和"><span class="nav-number">19.</span> <span class="nav-text">按组统计求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除-archlinux-软件包"><span class="nav-number">20.</span> <span class="nav-text">删除 archlinux 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#history-clean"><span class="nav-number">21.</span> <span class="nav-text">history clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-install"><span class="nav-number">22.</span> <span class="nav-text">brew install</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global-floder-sed"><span class="nav-number">22.1.</span> <span class="nav-text">global floder sed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量查找替换"><span class="nav-number">22.2.</span> <span class="nav-text">批量查找替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看用户所属组"><span class="nav-number">22.3.</span> <span class="nav-text">查看用户所属组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出-osx-系统的-java-版本"><span class="nav-number">22.4.</span> <span class="nav-text">列出 osx 系统的 java 版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出-java-的信任证书"><span class="nav-number">22.5.</span> <span class="nav-text">列出 java 的信任证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-导入证书"><span class="nav-number">22.6.</span> <span class="nav-text">java 导入证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-highlight"><span class="nav-number">23.</span> <span class="nav-text">vim highlight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-cpu-info"><span class="nav-number">24.</span> <span class="nav-text">check cpu info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk-和-grep-日志统计分析"><span class="nav-number">25.</span> <span class="nav-text">awk 和 grep 日志统计分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centos-查看某个库是哪个-package-提供的"><span class="nav-number">26.</span> <span class="nav-text">centos 查看某个库是哪个 package 提供的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-PPID"><span class="nav-number">27.</span> <span class="nav-text">查看 PPID</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">anyfeel</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"anyfeel-notes"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
