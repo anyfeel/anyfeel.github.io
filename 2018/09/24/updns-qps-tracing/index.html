@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="在操作 linux 过程中，经常由于错误的操作误删除文件，则可以使用 grep 操作找回 命令1$ grep -a -B 10 -A 100 &apos;vpsee.com&apos; /dev/sda1 &amp;gt; tmp.txt  -a表示将磁盘 /dev/sda1 当做二进制文件来读 -B 10 -A 100 表示如果匹配到 vpsee.com，则打印前 10 行和后 100 行 匹配结果重定向到 tmp.txt">
-<meta name="keywords" content="Linux">
+<meta name="description" content="环境问题排查 系统: 系统版本, 内核版本 cpu: 物理核心数, 物理核数,逻辑核数 内存: 内存大小 网卡: 网卡是否是万兆, 驱动型号  updns 版本确认（排查是否最近代码导致） 以前压测过的版本回退 v0.03 使用最近版本测试  系统各种参数优化确认 sendmmsg recvmmsg 多线程发包 so_reuseport 绑定网卡亲缘性 系统参数调优化 查看软件终端, 查看 cpu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 使用 grep 找回误删文件">
-<meta property="og:url" content="http://yoursite.com/2016/09/26/find-mistake-deleted-file-by-grep/index.html">
+<meta property="og:title" content="updns QPS 异常问题排查">
+<meta property="og:url" content="http://yoursite.com/2018/09/24/updns-qps-tracing/index.html">
 <meta property="og:site_name" content="冰澜">
-<meta property="og:description" content="在操作 linux 过程中，经常由于错误的操作误删除文件，则可以使用 grep 操作找回 命令1$ grep -a -B 10 -A 100 &apos;vpsee.com&apos; /dev/sda1 &amp;gt; tmp.txt  -a表示将磁盘 /dev/sda1 当做二进制文件来读 -B 10 -A 100 表示如果匹配到 vpsee.com，则打印前 10 行和后 100 行 匹配结果重定向到 tmp.txt">
+<meta property="og:description" content="环境问题排查 系统: 系统版本, 内核版本 cpu: 物理核心数, 物理核数,逻辑核数 内存: 内存大小 网卡: 网卡是否是万兆, 驱动型号  updns 版本确认（排查是否最近代码导致） 以前压测过的版本回退 v0.03 使用最近版本测试  系统各种参数优化确认 sendmmsg recvmmsg 多线程发包 so_reuseport 绑定网卡亲缘性 系统参数调优化 查看软件终端, 查看 cpu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-23T12:46:31.980Z">
+<meta property="og:updated_time" content="2018-09-24T02:51:22.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 使用 grep 找回误删文件">
-<meta name="twitter:description" content="在操作 linux 过程中，经常由于错误的操作误删除文件，则可以使用 grep 操作找回 命令1$ grep -a -B 10 -A 100 &apos;vpsee.com&apos; /dev/sda1 &amp;gt; tmp.txt  -a表示将磁盘 /dev/sda1 当做二进制文件来读 -B 10 -A 100 表示如果匹配到 vpsee.com，则打印前 10 行和后 100 行 匹配结果重定向到 tmp.txt">
+<meta name="twitter:title" content="updns QPS 异常问题排查">
+<meta name="twitter:description" content="环境问题排查 系统: 系统版本, 内核版本 cpu: 物理核心数, 物理核数,逻辑核数 内存: 内存大小 网卡: 网卡是否是万兆, 驱动型号  updns 版本确认（排查是否最近代码导致） 以前压测过的版本回退 v0.03 使用最近版本测试  系统各种参数优化确认 sendmmsg recvmmsg 多线程发包 so_reuseport 绑定网卡亲缘性 系统参数调优化 查看软件终端, 查看 cpu">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/26/find-mistake-deleted-file-by-grep/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/24/updns-qps-tracing/"/>
 
 
 
 
 
-  <title>Linux 使用 grep 找回误删文件 | 冰澜</title>
+  <title>updns QPS 异常问题排查 | 冰澜</title>
   
 
 
@@ -243,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/26/find-mistake-deleted-file-by-grep/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/updns-qps-tracing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="anyfeel">
@@ -260,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux 使用 grep 找回误删文件</h1>
+          <h1 class="post-title" itemprop="name headline">updns QPS 异常问题排查</h1>
         
 
         <div class="post-meta">
@@ -272,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-26T09:38:54+08:00">
-                2016-09-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T10:46:32+08:00">
+                2018-09-24
               </time>
             
 
@@ -291,8 +290,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/09/26/find-mistake-deleted-file-by-grep/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/find-mistake-deleted-file-by-grep/" itemprop="commentCount"></span>
+                <a href="/2018/09/24/updns-qps-tracing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/updns-qps-tracing/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -320,19 +319,31 @@
       
 
       
-        <p>在操作 linux 过程中，经常由于错误的操作误删除文件，则可以使用 grep 操作找回</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -a -B 10 -A 100 <span class="string">'vpsee.com'</span> /dev/sda1 &gt; tmp.txt</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-a</code>表示将磁盘 <code>/dev/sda1</code> 当做二进制文件来读</li>
-<li><code>-B 10 -A 100</code> 表示如果匹配到 <code>vpsee.com</code>，则打印前 10 行和后 100 行</li>
-<li>匹配结果重定向到 <code>tmp.txt</code></li>
+        <h2 id="环境问题排查"><a href="#环境问题排查" class="headerlink" title="环境问题排查"></a>环境问题排查</h2><ul>
+<li>系统: 系统版本, 内核版本</li>
+<li>cpu: 物理核心数, 物理核数,逻辑核数</li>
+<li>内存: 内存大小</li>
+<li>网卡: 网卡是否是万兆, 驱动型号</li>
 </ul>
-<h2 id="note"><a href="#note" class="headerlink" title="note"></a>note</h2><ol>
-<li>在发现误删除文件后，尽量减少其他的文件操作避免已删除的文件被覆盖。</li>
-<li>grep 操作耗费会占用大量的内存空间，如果发现 grep 失败（虚拟机中），可多分配内存重试。</li>
-<li>可能删除的文件不在 <code>/dev/sda1</code> 磁盘上，可使用 <code>df</code> 来查看是否有其他磁盘。</li>
-</ol>
-
+<h2 id="updns-版本确认（排查是否最近代码导致）"><a href="#updns-版本确认（排查是否最近代码导致）" class="headerlink" title="updns 版本确认（排查是否最近代码导致）"></a>updns 版本确认（排查是否最近代码导致）</h2><ul>
+<li>以前压测过的版本回退 v0.03</li>
+<li>使用最近版本测试</li>
+</ul>
+<h2 id="系统各种参数优化确认"><a href="#系统各种参数优化确认" class="headerlink" title="系统各种参数优化确认"></a>系统各种参数优化确认</h2><ul>
+<li>sendmmsg recvmmsg</li>
+<li>多线程发包</li>
+<li>so_reuseport</li>
+<li>绑定网卡亲缘性</li>
+<li>系统参数调优化</li>
+<li>查看软件终端, 查看 cpu 绑定是否生效</li>
+</ul>
+<h2 id="使用系统工具确认压测机器是否正常"><a href="#使用系统工具确认压测机器是否正常" class="headerlink" title="使用系统工具确认压测机器是否正常"></a>使用系统工具确认压测机器是否正常</h2><ul>
+<li>iperf 网络ok, 吞吐量OK, QPS: 60s  400W QPS, 800Mb/s</li>
+<li>udp sender 查看发包 80w/s, 系统占用低</li>
+<li>perf spin_irq_lock 60%</li>
+<li>查看网卡的收包, 接包, 丢包情况</li>
+</ul>
+<h2 id="被测端和压测端的情况"><a href="#被测端和压测端的情况" class="headerlink" title="被测端和压测端的情况"></a>被测端和压测端的情况</h2>
       
     </div>
     
@@ -347,12 +358,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
-        </div>
-      
 
       
       
@@ -362,8 +367,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/25/lua-and-or/" rel="next" title="lua and 和 or 踩坑">
-                <i class="fa fa-chevron-left"></i> lua and 和 or 踩坑
+              <a href="/2018/09/24/nginx-server-locaton-re-match/" rel="next" title="nginx server locaton 匹配顺序">
+                <i class="fa fa-chevron-left"></i> nginx server locaton 匹配顺序
               </a>
             
           </div>
@@ -371,10 +376,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/" rel="prev" title="使用 pprof 和 Flame-Graph 调试 Golang 应用">
-                使用 pprof 和 Flame-Graph 调试 Golang 应用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,8 +406,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2016/09/26/find-mistake-deleted-file-by-grep/"
-           data-title="Linux 使用 grep 找回误删文件" data-url="http://yoursite.com/2016/09/26/find-mistake-deleted-file-by-grep/">
+      <div class="ds-thread" data-thread-key="2018/09/24/updns-qps-tracing/"
+           data-title="updns QPS 异常问题排查" data-url="http://yoursite.com/2018/09/24/updns-qps-tracing/">
       </div>
     </div>
 
@@ -508,7 +509,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#note"><span class="nav-number">2.</span> <span class="nav-text">note</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境问题排查"><span class="nav-number">1.</span> <span class="nav-text">环境问题排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#updns-版本确认（排查是否最近代码导致）"><span class="nav-number">2.</span> <span class="nav-text">updns 版本确认（排查是否最近代码导致）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统各种参数优化确认"><span class="nav-number">3.</span> <span class="nav-text">系统各种参数优化确认</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用系统工具确认压测机器是否正常"><span class="nav-number">4.</span> <span class="nav-text">使用系统工具确认压测机器是否正常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#被测端和压测端的情况"><span class="nav-number">5.</span> <span class="nav-text">被测端和压测端的情况</span></a></li></ol></div>
             
 
           </div>

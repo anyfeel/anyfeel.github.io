@@ -87,17 +87,17 @@
 <meta property="og:site_name" content="冰澜">
 <meta property="og:description" content="前言最近用 Golang 实现了一个日志搜集上报程序(内部称 logger 项目)，线上灰度测试过程发现 logger 占用 CPU 非常高(80% - 100%)。而此项目之前就在线上使用，用于消费 NSQ 任务， CPU 占用一直在 1%，最近的修改只是添加了基于磁盘队列的生产者消费者服务，生产者使用 go-gin 实现了一个 httpserver，接收数据后写入磁盘队列；消费者为单个 gor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu1.png">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu2.png">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-normal-inuse-mem.png">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-normal-alloc-mem.png">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-high-cpu.png">
-<meta property="og:image" content="http://onepiece.b0.upaiyun.com/assets/logger-abnormal-cpu.png">
-<meta property="og:updated_time" content="2018-09-23T01:30:44.786Z">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu1.png">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu2.png">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-normal-inuse-mem.png">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-normal-alloc-mem.png">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-high-cpu.png">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-abnormal-cpu.png">
+<meta property="og:updated_time" content="2018-09-24T01:37:26.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 pprof 和 Flame-Graph 调试 Golang 应用">
 <meta name="twitter:description" content="前言最近用 Golang 实现了一个日志搜集上报程序(内部称 logger 项目)，线上灰度测试过程发现 logger 占用 CPU 非常高(80% - 100%)。而此项目之前就在线上使用，用于消费 NSQ 任务， CPU 占用一直在 1%，最近的修改只是添加了基于磁盘队列的生产者消费者服务，生产者使用 go-gin 实现了一个 httpserver，接收数据后写入磁盘队列；消费者为单个 gor">
-<meta name="twitter:image" content="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu1.png">
+<meta name="twitter:image" content="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu1.png">
 
 
 
@@ -362,23 +362,23 @@
 <h2 id="go-torch"><a href="#go-torch" class="headerlink" title="go-torch"></a>go-torch</h2><p>通过上面的 <code>go tool pprof</code> 工具和 top 指令，我们能定位出程序的热点代码，但缺乏对程序运行情况的整体感知，能不能有类似<code>火焰图</code>的效果让我们对整个堆栈统计信息有个一目了然的效果呢？这里要感谢 <code>uber</code> 开源的工具 <a href="https://github.com/uber/go-torch" target="_blank" rel="noopener">go-torch</a>，能让我们将 profile 信息转换成火焰图，具体安装和使用过程见项目的介绍。</p>
 <p>安装好 go-torch 后，运行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -u http://127.0.0.1:4500</span><br></pre></td></tr></table></figure>
-<p>生成 <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu.svg" target="_blank" rel="noopener">CPU 火焰图</a></p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu1.png" alt="CPU 火焰图"></p>
+<p>生成 <a href="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu.svg" target="_blank" rel="noopener">CPU 火焰图</a></p>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu1.png" alt="CPU 火焰图"></p>
 <p>从图中能一眼看到 publish 函数中的压缩操作占了 70% 左右的 CPU。</p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu2.png" alt="CPU 火焰图"></p>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-normal-cpu2.png" alt="CPU 火焰图"></p>
 <p>而 gin httpserver 只占用了 2% 左右的 CPU， 和我们使用 <code>go tool pprof</code> 的 top 命令分析的结果一致。</p>
 <p>默认情况下 go-torch 采集的是 CPU 的 profile， 这里介绍下 mem 火焰图的采集。</p>
-<h3 id="inuse-space-火焰图"><a href="#inuse-space-火焰图" class="headerlink" title="inuse_space 火焰图"></a><code>inuse_space</code> <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-inuse-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -inuse_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-inuse-mem.png" alt="火焰图"></p>
-<h3 id="alloc-space-火焰图"><a href="#alloc-space-火焰图" class="headerlink" title="alloc_space 火焰图"></a><code>alloc_space</code> <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-alloc-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -alloc_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-alloc-mem.png" alt="火焰图"></p>
+<h3 id="inuse-space-火焰图"><a href="#inuse-space-火焰图" class="headerlink" title="inuse_space 火焰图"></a><code>inuse_space</code> <a href="http://onepiece.nos-eastchina1.126.net/images/logger-normal-inuse-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -inuse_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-normal-inuse-mem.png" alt="火焰图"></p>
+<h3 id="alloc-space-火焰图"><a href="#alloc-space-火焰图" class="headerlink" title="alloc_space 火焰图"></a><code>alloc_space</code> <a href="http://onepiece.nos-eastchina1.126.net/images/logger-normal-alloc-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -alloc_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-normal-alloc-mem.png" alt="火焰图"></p>
 <h2 id="logger-100-CPU-分析"><a href="#logger-100-CPU-分析" class="headerlink" title="logger 100% CPU 分析"></a>logger 100% CPU 分析</h2><p>前面介绍了 <code>go tool pprof</code> 和火焰图的使用方法，这里使用火焰图复现 logger 100% CPU 问题。</p>
 <p>先看现象， 用 wrk 压测 logger</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t1 -c100 -d30 --script=post.lua &apos;http://127.0.0.1:4500/marco/log&apos;</span><br></pre></td></tr></table></figure>
 <p>查看 CPU 占用情况</p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-high-cpu.png" alt="CPU"></p>
-<p>采集 30s 的 CPU profile <a href="http://onepiece.b0.upaiyun.com/assets/logger-abnormal-cpu.svg" target="_blank" rel="noopener">火焰图</a></p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-abnormal-cpu.png" alt="火焰图"></p>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-high-cpu.png" alt="CPU"></p>
+<p>采集 30s 的 CPU profile <a href="http://onepiece.nos-eastchina1.126.net/images/logger-abnormal-cpu.svg" target="_blank" rel="noopener">火焰图</a></p>
+<p><img src="http://onepiece.nos-eastchina1.126.net/images/logger-abnormal-cpu.png" alt="火焰图"></p>
 <p>图中红色标记部分 <code>startSink</code> 函数中 <code>runtime.selectgo</code> 消耗了大量 CPU， 而 <code>runtime.selectgo</code> 上面只有 <code>runtime.sellock</code> 和 <code>runtime.selunlock</code> 两个操作，即大量 CPU 耗费在 <code>select</code> 操作上，火焰图呈秃顶状态，即瓶颈所在。</p>
 <p>查看 <code>startSink</code> 实现</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">for &#123;</span><br><span class="line">    if exit == true &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if moveforward &#123;</span><br><span class="line">        fakeRead = readChan</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        fakeRead = nil</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    select &#123;</span><br><span class="line">    case read := &lt;-fakeRead:</span><br><span class="line">        count++</span><br><span class="line">        buf.Write(read)</span><br><span class="line">    case &lt;-done:</span><br><span class="line">        DiskQueue.Close()</span><br><span class="line">        exit = true</span><br><span class="line">    default:</span><br><span class="line">        //pass</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if count == GlobalConf.CntBatch || exit == true &#123;</span><br><span class="line">        hostPoolResponse := pool.Get()</span><br><span class="line">        addr := hostPoolResponse.Host()</span><br><span class="line">        err := handler.Publish(fmt.Sprintf(&quot;%s%s&quot;， addr， SinkConf.Uri)， buf.Bytes())</span><br><span class="line">        hostPoolResponse.Mark(err)</span><br><span class="line"></span><br><span class="line">        if err != nil &#123;</span><br><span class="line">            Log.Error(&quot;%s&quot;， err.Error())</span><br><span class="line">            moveforward = false</span><br><span class="line">            time.Sleep(1 * time.Second)</span><br><span class="line">            continue</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            moveforward = true</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buf.Reset()</span><br><span class="line">        count = 0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -515,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,7 +528,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

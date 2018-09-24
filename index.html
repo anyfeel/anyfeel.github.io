@@ -242,6 +242,592 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/updns-qps-tracing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/24/updns-qps-tracing/" itemprop="url">updns QPS 异常问题排查</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T10:46:32+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/24/updns-qps-tracing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/updns-qps-tracing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境问题排查"><a href="#环境问题排查" class="headerlink" title="环境问题排查"></a>环境问题排查</h2><ul>
+<li>系统: 系统版本, 内核版本</li>
+<li>cpu: 物理核心数, 物理核数,逻辑核数</li>
+<li>内存: 内存大小</li>
+<li>网卡: 网卡是否是万兆, 驱动型号</li>
+</ul>
+<h2 id="updns-版本确认（排查是否最近代码导致）"><a href="#updns-版本确认（排查是否最近代码导致）" class="headerlink" title="updns 版本确认（排查是否最近代码导致）"></a>updns 版本确认（排查是否最近代码导致）</h2><ul>
+<li>以前压测过的版本回退 v0.03</li>
+<li>使用最近版本测试</li>
+</ul>
+<h2 id="系统各种参数优化确认"><a href="#系统各种参数优化确认" class="headerlink" title="系统各种参数优化确认"></a>系统各种参数优化确认</h2><ul>
+<li>sendmmsg recvmmsg</li>
+<li>多线程发包</li>
+<li>so_reuseport</li>
+<li>绑定网卡亲缘性</li>
+<li>系统参数调优化</li>
+<li>查看软件终端, 查看 cpu 绑定是否生效</li>
+</ul>
+<h2 id="使用系统工具确认压测机器是否正常"><a href="#使用系统工具确认压测机器是否正常" class="headerlink" title="使用系统工具确认压测机器是否正常"></a>使用系统工具确认压测机器是否正常</h2><ul>
+<li>iperf 网络ok, 吞吐量OK, QPS: 60s  400W QPS, 800Mb/s</li>
+<li>udp sender 查看发包 80w/s, 系统占用低</li>
+<li>perf spin_irq_lock 60%</li>
+<li>查看网卡的收包, 接包, 丢包情况</li>
+</ul>
+<h2 id="被测端和压测端的情况"><a href="#被测端和压测端的情况" class="headerlink" title="被测端和压测端的情况"></a>被测端和压测端的情况</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/nginx-server-locaton-re-match/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/24/nginx-server-locaton-re-match/" itemprop="url">nginx server locaton 匹配顺序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T10:40:52+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/24/nginx-server-locaton-re-match/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/nginx-server-locaton-re-match/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="server-name"><a href="#server-name" class="headerlink" title="server name"></a>server name</h2><ol>
+<li>完全匹配</li>
+<li>通配符在前面，<code>*.tesetwb.com</code></li>
+<li>通配符在后面，<code>www.testwb.*</code></li>
+<li>正则表达式匹配 <code>(.*)?anyfeel.cn</code></li>
+</ol>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><ol>
+<li>完全匹配，<code>=</code> or <code>/</code></li>
+<li>大小写敏感，<code>~</code></li>
+<li>大小写不敏感，<code>~*</code></li>
+<li>前半部分匹配，<code>^~</code></li>
+<li>@location, 表示只能用于 nginx 内部跳转</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/nginx-module-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/24/nginx-module-init/" itemprop="url">Nginx 模块初始化过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T09:50:39+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/24/nginx-module-init/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/nginx-module-init/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="初始化核心函数"><a href="#初始化核心函数" class="headerlink" title="初始化核心函数"></a>初始化核心函数</h2><p><code>ngx_init_cycle()(ngx_cycle.c:275)</code> -&gt; <code>ngx_conf_parse()(ngx_conf_file.c:)</code> -&gt; <code>ngx_conf_handler()</code></p>
+<h2 id="初始化步骤"><a href="#初始化步骤" class="headerlink" title="初始化步骤"></a>初始化步骤</h2><ul>
+<li><p>modules 和序号绑定关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ngx_int_t</span><br><span class="line">ngx_preinit_modules(void)</span><br><span class="line">&#123;</span><br><span class="line">    ngx_uint_t  i;</span><br><span class="line"></span><br><span class="line">    for (i = 0; ngx_modules[i]; i++) &#123;</span><br><span class="line">        ngx_modules[i]-&gt;index = i;</span><br><span class="line">        ngx_modules[i]-&gt;name = ngx_module_names[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ngx_modules_n = i;</span><br><span class="line">    ngx_max_module = ngx_modules_n + NGX_MAX_DYNAMIC_MODULES;</span><br><span class="line"></span><br><span class="line">    return NGX_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ngx_init_cycle</code> 初始化核心模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">for (i = 0; cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">	if (cycle-&gt;modules[i]-&gt;type != NGX_CORE_MODULE) &#123;</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	module = cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">	if (module-&gt;create_conf) &#123;</span><br><span class="line">		rv = module-&gt;create_conf(cycle);</span><br><span class="line">		if (rv == NULL) &#123;</span><br><span class="line">			ngx_destroy_pool(pool);</span><br><span class="line">			return NULL;</span><br><span class="line">		&#125;</span><br><span class="line">		cycle-&gt;conf_ctx[cycle-&gt;modules[i]-&gt;index] = rv;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">for (i = 0; cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">	if (cycle-&gt;modules[i]-&gt;type != NGX_CORE_MODULE) &#123;  // NGX_CORE_MODULE 核心模块</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	module = cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">	if (module-&gt;init_conf) &#123;</span><br><span class="line">		if (module-&gt;init_conf(cycle,</span><br><span class="line">							  cycle-&gt;conf_ctx[cycle-&gt;modules[i]-&gt;index]) // 初始化</span><br><span class="line">			== NGX_CONF_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			environ = senv;</span><br><span class="line">			ngx_destroy_cycle_pools(&amp;conf);</span><br><span class="line">			return NULL;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用 ngx_events_block 来解析具体模块如配置和指令, 以 event 模块为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">static char *</span><br><span class="line">ngx_events_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    *(void **) conf = ctx;</span><br><span class="line"></span><br><span class="line">    for (i = 0; cf-&gt;cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">        if (cf-&gt;cycle-&gt;modules[i]-&gt;type != NGX_EVENT_MODULE) &#123;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        m = cf-&gt;cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">        if (m-&gt;create_conf) &#123;</span><br><span class="line">            (*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index] =</span><br><span class="line">                                                     m-&gt;create_conf(cf-&gt;cycle);  // 为每个 event 模块分配内存</span><br><span class="line">            if ((*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index] == NULL) &#123;</span><br><span class="line">                return NGX_CONF_ERROR;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pcf = *cf;</span><br><span class="line">    cf-&gt;ctx = ctx;</span><br><span class="line">    cf-&gt;module_type = NGX_EVENT_MODULE;</span><br><span class="line">    cf-&gt;cmd_type = NGX_EVENT_CONF;</span><br><span class="line"></span><br><span class="line">    rv = ngx_conf_parse(cf, NULL);  // 解析 event 模块，如 `work_connections`</span><br><span class="line"></span><br><span class="line">    *cf = pcf;</span><br><span class="line"></span><br><span class="line">    if (rv != NGX_CONF_OK) &#123;</span><br><span class="line">        return rv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (i = 0; cf-&gt;cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">        if (cf-&gt;cycle-&gt;modules[i]-&gt;type != NGX_EVENT_MODULE) &#123;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        m = cf-&gt;cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">        if (m-&gt;init_conf) &#123;</span><br><span class="line">            rv = m-&gt;init_conf(cf-&gt;cycle,</span><br><span class="line">                              (*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index]); // 和指令默认值对比，设置指令的值</span><br><span class="line">            if (rv != NGX_CONF_OK) &#123;</span><br><span class="line">                return rv;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return NGX_CONF_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/tcp-connection-status/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anyfeel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰澜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/24/tcp-connection-status/" itemprop="url">TCP 连接状态整理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/24/tcp-connection-status/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/24/tcp-connection-status/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ol>
+<li>五层架构与七层架构</li>
+<li>链路层作用 ARP，以太网包格式</li>
+<li>IP/TCP 格式</li>
+<li>TCP 状态机及常用的错误码，time_wait 相关系，SO_RESUSEADDR 作用。</li>
+<li>NAGEL 算法(TCP_NODELAY关闭NAGEL)滑动窗口拥塞避免（慢启动），快速重传与快速恢复，选择重传</li>
+<li>四种定时器的作用 ACK 定时器，persist 定时器，keep-alive 定时器，2MSL 定时器</li>
+<li>使用 TCPDUMP 和应用程序分析 TCP 状态机</li>
+</ol>
+<blockquote>
+<p>note:so_linger 作用： 发送 RST 包来断开连接，而不是发送 FIN.</p>
+</blockquote>
+<h2 id="connect-resty-by-peer"><a href="#connect-resty-by-peer" class="headerlink" title="connect resty by peer"></a>connect resty by peer</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>本端向对端发送数据，但对端无法识别该连接，返回一个 RST 强制关闭连接</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ul>
+<li>当尝试和未开放的服务器端口建立tcp连接时，服务器tcp将会直接向客户端发送reset报文，表现状态是连接决绝。</li>
+<li>双方之前已经正常建立了通信通道，也可能进行过了交互，当某一方在交互的过程中发生了异常，如崩溃等，异常的一方会向对端发送reset报文，通知对方将连接关闭</li>
+<li>当收到TCP报文，但是发现该报文不是已建立的TCP连接列表可处理的，则其直接向对端发送reset报文</li>
+<li>ack报文丢失，并且超出一定的重传次数或时间后，会主动向对端发送reset报文释放该TCP连接</li>
+<li>一端设置了 SO_LINGER 选项来关闭连接，则对端会收到 connection by peer 错误来关闭连接</li>
+</ul>
+<h2 id="TCP-状态机"><a href="#TCP-状态机" class="headerlink" title="TCP 状态机"></a>TCP 状态机</h2><p><img src="http://onepiece.nos-eastchina1.126.net/images/tcp-status.jpeg" alt="tcp 状态机"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/adjust-disk-partition-size/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1144,603 +1730,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/unix-env-load-order/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/unix-env-load-order/" itemprop="url">Unix 环境变量加载顺序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:15:21+08:00">
-                2018-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/23/unix-env-load-order/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/23/unix-env-load-order/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="OSX"><a href="#OSX" class="headerlink" title="OSX"></a>OSX</h2><p>Mac系统的环境变量加载顺序为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/profile -&gt; /etc/paths -&gt; ~/.bash_profile -&gt; ~/.bash_login -&gt;  ~/.profile -&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>特别注意 /etc/paths 中的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin</span><br><span class="line">/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/sbin</span><br><span class="line">/usr/local/bin</span><br></pre></td></tr></table></figure></p>
-<p>Homebrew 安装的软件，其二进制执行文件都放在/usr/local/bin中，<br>bin 在使用时的查找不是覆盖原则，而是优先查找，所以例如 mac 已经自带了sqlite3，如果 brew 安装后，最新版的 sqlite3 是不会被调用的，因此可以将顺序修改一下以达到目的。</p>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>Mac系统的环境变量加载顺序为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/profile -&gt; (~/.bash_profile | ~/.bash_login | ~/.profile) -&gt; ~/.bashrc -&gt; /etc/bashrc -&gt; ~/.bash_logout</span><br></pre></td></tr></table></figure></p>
-<p>/usr/bin:usr/sbin 在 /etc/profile 文件中</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/load-balance-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/19/load-balance-algorithm/" itemprop="url">Nginx 基于权重的平滑轮询算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T12:43:14+08:00">
-                2018-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/19/load-balance-algorithm/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/19/load-balance-algorithm/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Nginx-基于权重的轮询算法"><a href="#Nginx-基于权重的轮询算法" class="headerlink" title="Nginx 基于权重的轮询算法"></a>Nginx 基于权重的轮询算法</h2><p>Nginx基于权重的轮询算法的实现可以参考它的一次代码提交 <a href="https://github.com/phusion/nginx/commit/27e94984486058d73157038f7950a0a36ecc6e35" target="_blank" rel="noopener">Upstream: smooth weighted round-robin balancing</a></p>
-<p>它不但实现了基于权重的轮询算法，而且还实现了平滑的算法。所谓平滑，就是在一段时间内，不仅服务器被选择的次数的分布和它们的权重一致，而且调度算法还比较均匀的选择服务器，而不会集中一段时间之内只选择某一个权重比较高的服务器。如果使用随机算法选择或者普通的基于权重的轮询算法，就比较容易造成某个服务集中被调用压力过大。</p>
-<p>举个例子，比如权重为 {a:5, b:1, c:1} 的一组服务器，Nginx 的平滑的轮询算法选择的序列为{ a, a, b, a, c, a, a },这显然要比{ c, b, a, a, a, a, a } 序列更平滑，更合理，不会造成对a服务器的集中访问。</p>
-<h2 id="Lua-实现"><a href="#Lua-实现" class="headerlink" title="Lua 实现"></a>Lua 实现</h2><p>每次需要遍历所有的 servers 列表，返回 best server</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">local ceil = math.ceil</span><br><span class="line"></span><br><span class="line">local _M = &#123; _VERSION = &quot;0.11&quot; &#125;</span><br><span class="line"></span><br><span class="line">--[[</span><br><span class="line">parameters:</span><br><span class="line">    - (table) servers</span><br><span class="line">    - (function) peer_cb(index, server)</span><br><span class="line">return:</span><br><span class="line">    - (table) server</span><br><span class="line">    - (string) error</span><br><span class="line">--]]</span><br><span class="line">function _M.next_round_robin_server(servers, peer_cb)</span><br><span class="line">    local srvs_cnt = #servers</span><br><span class="line"></span><br><span class="line">    if srvs_cnt == 1 then</span><br><span class="line">        if peer_cb(1, servers[1]) then</span><br><span class="line">            return servers[1], nil</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">        return nil, &quot;round robin: no servers available&quot;</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    -- select round robin server</span><br><span class="line">    local best</span><br><span class="line">    local max_weight</span><br><span class="line">    local weight_sum = 0</span><br><span class="line">    for idx = 1, srvs_cnt do</span><br><span class="line">        local srv = servers[idx]</span><br><span class="line">        -- init round robin state</span><br><span class="line">        srv.weight = srv.weight or 1</span><br><span class="line">        srv.effective_weight = srv.effective_weight or srv.weight</span><br><span class="line">        srv.current_weight = srv.current_weight or 0</span><br><span class="line"></span><br><span class="line">        if peer_cb(idx, srv) then</span><br><span class="line">            srv.current_weight = srv.current_weight + srv.effective_weight</span><br><span class="line">            weight_sum = weight_sum + srv.effective_weight</span><br><span class="line"></span><br><span class="line">            if srv.effective_weight &lt; srv.weight then</span><br><span class="line">                srv.effective_weight = srv.effective_weight + 1</span><br><span class="line">            end</span><br><span class="line"></span><br><span class="line">            if not max_weight or srv.current_weight &gt; max_weight then</span><br><span class="line">                max_weight = srv.current_weight</span><br><span class="line">                best = srv</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    if not best then</span><br><span class="line">        return nil, &quot;round robin: no servers available&quot;</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    best.current_weight = best.current_weight - weight_sum</span><br><span class="line"></span><br><span class="line">    return best, nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function _M.free_round_robin_server(srv, failed)</span><br><span class="line">    if not failed then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    srv.effective_weight = ceil((srv.effective_weight or 1) / 2)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">return _M</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/tcpdump-using-skill/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/18/tcpdump-using-skill/" itemprop="url">Unix tcpdump 使用技巧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T21:46:18+08:00">
-                2018-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/18/tcpdump-using-skill/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/18/tcpdump-using-skill/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="常用-tcpdump-参数解析"><a href="#常用-tcpdump-参数解析" class="headerlink" title="常用 tcpdump 参数解析"></a>常用 tcpdump 参数解析</h2><ul>
-<li>-i 指定网卡，一般不清楚网卡设置直接使用 “any” 表示抓取所有网卡</li>
-<li>-A 使用 ASCII 码打印收到的每个包<br>- -X 同时以十六进制和 ASCII 打印包</li>
-</ul>
-<h2 id="常用抓包实例"><a href="#常用抓包实例" class="headerlink" title="常用抓包实例"></a>常用抓包实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># host 和 port 过滤</span><br><span class="line">tcpdump -i any -Ans 0 &apos;src host 1.1.1.1 &amp;&amp; dst host 2.2.2. &amp;&amp; dst port 3100&apos;</span><br><span class="line"></span><br><span class="line"># GET</span><br><span class="line">tcpdump -i eth1 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420&apos;</span><br><span class="line"></span><br><span class="line"># POST</span><br><span class="line">tcpdump -i eth1 &apos;tcp[(tcp[12]&gt;&gt;2):4] = 0x504f5354&apos;</span><br><span class="line"></span><br><span class="line"># TCP 标志位</span><br><span class="line">tcpdump -i any -Ans 0 &apos;host 183.214.154.4 &amp;&amp; tcp[tcpflags]=tcp-syn&apos;</span><br></pre></td></tr></table></figure>
-<h2 id="tcpdump-过滤器"><a href="#tcpdump-过滤器" class="headerlink" title="tcpdump 过滤器"></a>tcpdump 过滤器</h2><h3 id="目标语法-dst-和-src-表示来源和目的地"><a href="#目标语法-dst-和-src-表示来源和目的地" class="headerlink" title="目标语法 dst 和 src 表示来源和目的地"></a>目标语法 <code>dst</code> 和 <code>src</code> 表示来源和目的地</h3><p>eg: src host and dst port</p>
-<h3 id="逻辑语法-and、or-and-not"><a href="#逻辑语法-and、or-and-not" class="headerlink" title="逻辑语法 and、or and not"></a>逻辑语法 <code>and</code>、<code>or</code> and <code>not</code></h3><p>eg: src host1 or src host2</p>
-<h3 id="包内容过滤"><a href="#包内容过滤" class="headerlink" title="包内容过滤"></a>包内容过滤</h3><p>proto[x:y] 过滤从x字节开始的y字节数。比如ip[2:2]过滤出3、4字节（第一字节从0开始排</p>
-<p>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tcp[(tcp[12]&gt;&gt;2):4] = 0x47455420</span><br><span class="line">tcp[12]&gt;&gt;4&lt;&lt;2 == tcp[12]&gt;&gt;22</span><br><span class="line">tcp[12]&gt;&gt;4 拿到 13 字节的 高 4 位，</span><br><span class="line">&gt;&gt;2相当于除以 4(32/8)，即偏移的 8 bits 位数</span><br></pre></td></tr></table></figure></p>
-<h3 id="标志位过滤"><a href="#标志位过滤" class="headerlink" title="标志位过滤"></a>标志位过滤</h3><p>tcp[tcpflags]=tcp-syn</p>
-<h2 id="TCP-Header-Format"><a href="#TCP-Header-Format" class="headerlink" title="TCP Header Format"></a>TCP Header Format</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   0                   1                   2                   3</span><br><span class="line">   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |          Source Port          |       Destination Port        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                        Sequence Number                        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                    Acknowledgment Number                      |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |  Data |           |U|A|P|R|S|F|                               |</span><br><span class="line">  | Offset| Reserved  |R|C|S|S|Y|I|            Window             |</span><br><span class="line">  |       |           |G|K|H|T|N|N|                               |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |           Checksum            |         Urgent Pointer        |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                    Options                    |    Padding    |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">  |                             data                              |</span><br><span class="line">  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line"></span><br><span class="line">Data Offset:  4 bits</span><br><span class="line"></span><br><span class="line">   The number of ```32 bit words``` in the TCP Header.  This indicates where</span><br><span class="line">   the data begins.  The TCP header (even one including options) is an</span><br><span class="line">   integral number of 32 bits long.</span><br></pre></td></tr></table></figure>
-<h2 id="IP-format"><a href="#IP-format" class="headerlink" title="IP format"></a>IP format</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|Version|  IHL  |Type of Service|          Total Length         |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|         Identification        |Flags|      Fragment Offset    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|  Time to Live |    Protocol   |         Header Checksum       |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                       Source Address                          |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                    Destination Address                        |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                    Options                    |    Padding    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/" itemprop="url">使用 pprof 和 Flame-Graph 调试 Golang 应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T12:22:09+08:00">
-                2018-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/21/using-pprof-and-Flame-Graph-debug-Golang-Application/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近用 Golang 实现了一个日志搜集上报程序(内部称 <code>logger</code> 项目)，线上灰度测试过程发现 <code>logger</code> 占用 CPU 非常高(80% - 100%)。而此项目之前就在线上使用，用于消费 <code>NSQ</code> 任务， CPU 占用一直在 1%，最近的修改只是添加了基于磁盘队列的生产者消费者服务，生产者使用 go-gin 实现了一个 httpserver，接收数据后写入磁盘队列；消费者为单个 goroutine 循环 <code>POST</code> 数据。而 httpserver 压力不大(小于 100 QPS)，不至于占用如此高的 CPU，大致 review 代码后未发现异常，借助 <code>pprof</code> 和 <code>flame-graph</code> 来分析定位问题。</p>
-<h2 id="pprof"><a href="#pprof" class="headerlink" title="pprof"></a>pprof</h2><p><code>pprof</code> 我理解是 program profile(即程序性能剖析之意)，Golang 提供的两个官方包<br><a href="https://golang.org/pkg/runtime/pprof/" target="_blank" rel="noopener">runtime/pprof</a>，<br><a href="https://golang.org/pkg/net/http/pprof/" target="_blank" rel="noopener">net/http/pprof</a><br>能方便的采集程序运行的堆栈、goroutine、内存分配和占用、io 等信息的 <code>.prof</code> 文件，然后可以使用 go tool pprof 分析 <code>.prof</code> 文件。两个包的作用是一样的，只是使用方式的差异。</p>
-<h3 id="runtime-pprof"><a href="#runtime-pprof" class="headerlink" title="runtime/pprof"></a>runtime/pprof</h3><p>如果程序为非 httpserver 类型，使用此方式；在 main 函数中嵌入如下代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import &quot;runtime/pprof&quot;</span><br><span class="line"></span><br><span class="line">var cpuprofile = flag.String(&quot;cpuprofile&quot;， &quot;&quot;， &quot;write cpu profile `file`&quot;)</span><br><span class="line">var memprofile = flag.String(&quot;memprofile&quot;， &quot;&quot;， &quot;write memory profile to `file`&quot;)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    flag.Parse()</span><br><span class="line">    if *cpuprofile != &quot;&quot; &#123;</span><br><span class="line">        f， err := os.Create(*cpuprofile)</span><br><span class="line">        if err != nil &#123;</span><br><span class="line">            log.Fatal(&quot;could not create CPU profile: &quot;， err)</span><br><span class="line">        &#125;</span><br><span class="line">        if err := pprof.StartCPUProfile(f); err != nil &#123;</span><br><span class="line">            log.Fatal(&quot;could not start CPU profile: &quot;， err)</span><br><span class="line">        &#125;</span><br><span class="line">        defer pprof.StopCPUProfile()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // ... rest of the program ...</span><br><span class="line"></span><br><span class="line">    if *memprofile != &quot;&quot; &#123;</span><br><span class="line">        f， err := os.Create(*memprofile)</span><br><span class="line">        if err != nil &#123;</span><br><span class="line">            log.Fatal(&quot;could not create memory profile: &quot;， err)</span><br><span class="line">        &#125;</span><br><span class="line">        runtime.GC() // get up-to-date statistics</span><br><span class="line">        if err := pprof.WriteHeapProfile(f); err != nil &#123;</span><br><span class="line">            log.Fatal(&quot;could not write memory profile: &quot;， err)</span><br><span class="line">        &#125;</span><br><span class="line">        f.Close()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./logger -cpuprofile cpu.prof -memprofile mem.prof</span><br></pre></td></tr></table></figure>
-<p>可以得到 cpu.prof 和 mem.prof 文件，使用 go tool pprof 分析。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof logger cpu.prof</span><br><span class="line">go tool pprof logger mem.prof</span><br></pre></td></tr></table></figure>
-<h3 id="net-http-pprof"><a href="#net-http-pprof" class="headerlink" title="net/http/pprof"></a>net/http/pprof</h3><p>如果程序为 httpserver 类型， 则只需要导入该包:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import _ &quot;net/http/pprof&quot;</span><br></pre></td></tr></table></figure>
-<p>如果 httpserver 使用 <code>go-gin</code> 包，而不是使用默认的 <code>http</code> 包启动，则需要手动添加 <code>/debug/pprof</code> 对应的 handler，github 有<a href="https://github.com/DeanThompson/ginpprof" target="_blank" rel="noopener">封装好的模版</a>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &quot;github.com/DeanThompson/ginpprof&quot;</span><br><span class="line">...</span><br><span class="line">router := gin.Default()</span><br><span class="line">ginpprof.Wrap(router)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>导入包重新编译程序后运行，在浏览器中访问 <code>http://host:port/debug/pprof</code> 可以看到如下信息，这里 <code>host</code> 和 <code>port</code> 是程序绑定的 <code>host</code> 和 <code>port</code>，例如我自己的 logger 程序，访问如下地址:</p>
-<p><code>http://127.0.0.1:4500/debug/pprof/</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/debug/pprof/</span><br><span class="line"></span><br><span class="line">profiles:</span><br><span class="line">0	block</span><br><span class="line">62	goroutine</span><br><span class="line">427	heap</span><br><span class="line">0	mutex</span><br><span class="line">12	threadcreate</span><br><span class="line"></span><br><span class="line">full goroutine stack dump</span><br></pre></td></tr></table></figure>
-<p>点击对应的 profile 可以查看具体信息，通过浏览器查看的数据不能直观反映程序性能问题，<code>go tool pprof</code> 命令行工具提供了丰富的工具集:</p>
-<p>查看 heap 信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof http://127.0.0.1:4500/debug/pprof/heap</span><br></pre></td></tr></table></figure>
-<p>查看 30s 的 CPU 采样信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof http://127.0.0.1:4500/debug/pprof/profile</span><br></pre></td></tr></table></figure>
-<p>其他功能使用参见<br><a href="https://golang.org/pkg/net/http/pprof/" target="_blank" rel="noopener">官方 net/http/pprof 库</a></p>
-<h3 id="pprof-CPU-分析"><a href="#pprof-CPU-分析" class="headerlink" title="pprof CPU 分析"></a>pprof CPU 分析</h3><p>采集 profile 数据之后，可以分析 CPU 热点代码。<br>执行下面命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof http://127.0.0.1:4500/debug/pprof/profile</span><br></pre></td></tr></table></figure>
-<p>会采集 30s 的 profile 数据，之后进入终端交互模式，输入 <code>top</code> 指令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">~ # go tool pprof http://127.0.0.1:4500/debug/pprof/profile</span><br><span class="line">Fetching profile over HTTP from http://127.0.0.1:4500/debug/pprof/profile</span><br><span class="line">Saved profile in /home/vagrant/pprof/pprof.logger.samples.cpu.012.pb.gz</span><br><span class="line">File: logger</span><br><span class="line">Type: cpu</span><br><span class="line">Time: Jan 19， 2018 at 2:01pm (CST)</span><br><span class="line">Duration: 30s， Total samples = 390ms ( 1.30%)</span><br><span class="line">Entering interactive mode (type &quot;help&quot; for commands， &quot;o&quot; for options)</span><br><span class="line">(pprof) top</span><br><span class="line">Showing nodes accounting for 360ms， 92.31% of 390ms total</span><br><span class="line">Showing top 10 nodes out of 74</span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">     120ms 30.77% 30.77%      180ms 46.15%  compress/flate.(*compressor).findMatch /usr/local/go/src/compress/flate/deflate.go</span><br><span class="line">     100ms 25.64% 56.41%      310ms 79.49%  compress/flate.(*compressor).deflate /usr/local/go/src/compress/flate/deflate.go</span><br><span class="line">      60ms 15.38% 71.79%       60ms 15.38%  compress/flate.matchLen /usr/local/go/src/compress/flate/deflate.go</span><br><span class="line">      20ms  5.13% 76.92%       20ms  5.13%  compress/flate.(*huffmanBitWriter).indexTokens /usr/local/go/src/compress/flate/huffman_bit_writer.go</span><br><span class="line">      10ms  2.56% 79.49%       10ms  2.56%  compress/flate.(*huffmanBitWriter).writeTokens /usr/local/go/src/compress/flate/huffman_bit_writer.go</span><br><span class="line">      10ms  2.56% 82.05%       10ms  2.56%  hash/adler32.update /usr/local/go/src/hash/adler32/adler32.go</span><br><span class="line">      10ms  2.56% 84.62%       10ms  2.56%  runtime.futex /usr/local/go/src/runtime/sys_linux_amd64.s</span><br><span class="line">      10ms  2.56% 87.18%       10ms  2.56%  runtime.memclrNoHeapPointers /usr/local/go/src/runtime/memclr_amd64.s</span><br><span class="line">      10ms  2.56% 89.74%       10ms  2.56%  runtime.pcvalue /usr/local/go/src/runtime/symtab.go</span><br><span class="line">      10ms  2.56% 92.31%       10ms  2.56%  runtime.runqput /usr/local/go/src/runtime/runtime2.go</span><br><span class="line">(pprof)</span><br></pre></td></tr></table></figure>
-<p>从统计可以 <code>top5</code> 操作全是数据压缩操作， logger 程序本身开启了压缩等级为 9 的 gzip 压缩，如果希望减少压缩 CPU 占用，可以调整压缩等级。</p>
-<h3 id="pprof-mem-分析"><a href="#pprof-mem-分析" class="headerlink" title="pprof mem 分析"></a>pprof mem 分析</h3><p>同时 pprof 也支持内存相关数据分析</p>
-<h4 id="inuse-space-分析常驻内存"><a href="#inuse-space-分析常驻内存" class="headerlink" title="--inuse_space 分析常驻内存"></a><code>--inuse_space</code> 分析常驻内存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof -alloc_space http://127.0.0.1:4500/debug/pprof/heap</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">~ # go tool pprof -alloc_space http://127.0.0.1:4500/debug/pprof/heap</span><br><span class="line">Fetching profile over HTTP from http://127.0.0.1:4500/debug/pprof/heap</span><br><span class="line">Saved profile in /home/vagrant/pprof/pprof.logger.alloc_objects.alloc_space.inuse_objects.inuse_space.006.pb.gz</span><br><span class="line">File: logger</span><br><span class="line">Type: alloc_space</span><br><span class="line">Time: Jan 19， 2018 at 2:21pm (CST)</span><br><span class="line">Entering interactive mode (type &quot;help&quot; for commands， &quot;o&quot; for options)</span><br><span class="line">(pprof) top</span><br><span class="line">Showing nodes accounting for 47204.90MB， 99.16% of 47606.01MB total</span><br><span class="line">Dropped 230 nodes (cum &lt;= 238.03MB)</span><br><span class="line">Showing top 10 nodes out of 39</span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">28290.79MB 59.43% 59.43% 28290.79MB 59.43%  bytes.makeSlice /usr/local/go/src/bytes/buffer.go</span><br><span class="line"> 8706.78MB 18.29% 77.72% 10082.12MB 21.18%  compress/flate.NewWriter /usr/local/go/src/compress/flate/deflate.go</span><br><span class="line"> 8559.74MB 17.98% 95.70%  8559.74MB 17.98%  github.com/nsqio/go-diskqueue.(*diskQueue).readOne /home/vagrant/go/src/github.com/nsqio/go-diskqueue/diskqueue.go</span><br><span class="line"> 1343.78MB  2.82% 98.52%  1343.78MB  2.82%  compress/flate.(*compressor).init /usr/local/go/src/compress/flate/deflate.go</span><br><span class="line">  298.81MB  0.63% 99.15%   298.81MB  0.63%  github.com/nsqio/go-nsq.ReadResponse /home/vagrant/go/src/github.com/nsqio/go-nsq/protocol.go</span><br><span class="line">       2MB 0.0042% 99.15% 12097.28MB 25.41%  main.(*PostPublisher).Publish /home/vagrant/logger/src/handler.go</span><br><span class="line">    1.50MB 0.0032% 99.15% 26358.53MB 55.37%  io/ioutil.readAll /usr/local/go/src/io/ioutil/ioutil.go</span><br><span class="line">       1MB 0.0021% 99.16% 26378.74MB 55.41%  github.com/gin-gonic/gin.LoggerWithWriter.func1 /home/vagrant/go/src/github.com/gin-gonic/gin/logger.go</span><br><span class="line">    0.50MB 0.0011% 99.16% 26434.42MB 55.53%  net/http.(*conn).serve /usr/local/go/src/net/http/server.go</span><br><span class="line">         0     0% 99.16% 26357.03MB 55.36%  bytes.(*Buffer).ReadFrom /usr/local/go/src/bytes/buffer.go</span><br><span class="line">(pprof)</span><br></pre></td></tr></table></figure>
-<h4 id="alloc-objects-分析临时内存"><a href="#alloc-objects-分析临时内存" class="headerlink" title="--alloc_objects 分析临时内存"></a><code>--alloc_objects</code> 分析临时内存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof -inuse_space http://127.0.0.1:4500/debug/pprof/heap</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">~ # go tool pprof -inuse_space http://127.0.0.1:4500/debug/pprof/heap</span><br><span class="line">Fetching profile over HTTP from http://127.0.0.1:4500/debug/pprof/heap</span><br><span class="line">Saved profile in /home/vagrant/pprof/pprof.logger.alloc_objects.alloc_space.inuse_objects.inuse_space.007.pb.gz</span><br><span class="line">File: logger</span><br><span class="line">Type: inuse_space</span><br><span class="line">Time: Jan 19， 2018 at 2:24pm (CST)</span><br><span class="line">Entering interactive mode (type &quot;help&quot; for commands， &quot;o&quot; for options)</span><br><span class="line">(pprof) top</span><br><span class="line">Showing nodes accounting for 20441.23kB， 100% of 20441.23kB total</span><br><span class="line">Showing top 10 nodes out of 35</span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">18071.75kB 88.41% 88.41% 18071.75kB 88.41%  bytes.makeSlice /usr/local/go/src/bytes/buffer.go</span><br><span class="line">  815.27kB  3.99% 92.40%   815.27kB  3.99%  github.com/nsqio/go-diskqueue.(*diskQueue).readOne /home/vagrant/go/src/github.com/nsqio/go-diskqueue/diskqueue.go</span><br><span class="line">  528.17kB  2.58% 94.98%   528.17kB  2.58%  regexp.(*bitState).reset /usr/local/go/src/regexp/backtrack.go</span><br><span class="line">     514kB  2.51% 97.50%      514kB  2.51%  net/http.newBufioWriterSize /usr/local/go/src/bufio/bufio.go</span><br><span class="line">  512.05kB  2.50%   100%   512.05kB  2.50%  net/http.(*persistConn).roundTrip /usr/local/go/src/net/http/transport.go</span><br><span class="line">         0     0%   100%   528.17kB  2.58%  _/home/vagrant/logger/src/parser.ParserLogForMarco /home/vagrant/logger/src/parser/parser.go</span><br><span class="line">         0     0%   100%   528.17kB  2.58%  bytes.(*Buffer).ReadFrom /usr/local/go/src/bytes/buffer.go</span><br><span class="line">         0     0%   100% 17543.58kB 85.82%  bytes.(*Buffer).Write /usr/local/go/src/bytes/buffer.go</span><br><span class="line">         0     0%   100% 17543.58kB 85.82%  bytes.(*Buffer).grow /usr/local/go/src/bytes/buffer.go</span><br><span class="line">         0     0%   100%   528.17kB  2.58%  github.com/gin-gonic/gin.(*Context).Next /home/vagrant/go/src/github.com/gin-gonic/gin/context.go</span><br><span class="line">(pprof)</span><br></pre></td></tr></table></figure>
-<p>通过常驻内存和临时内存分配 top 值，可以查看当前程序的内存占用情况和热点内存使用的代码，结合代码分析热点代码是否存在 bug、是否有优化的空间。</p>
-<h2 id="go-torch"><a href="#go-torch" class="headerlink" title="go-torch"></a>go-torch</h2><p>通过上面的 <code>go tool pprof</code> 工具和 top 指令，我们能定位出程序的热点代码，但缺乏对程序运行情况的整体感知，能不能有类似<code>火焰图</code>的效果让我们对整个堆栈统计信息有个一目了然的效果呢？这里要感谢 <code>uber</code> 开源的工具 <a href="https://github.com/uber/go-torch" target="_blank" rel="noopener">go-torch</a>，能让我们将 profile 信息转换成火焰图，具体安装和使用过程见项目的介绍。</p>
-<p>安装好 go-torch 后，运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -u http://127.0.0.1:4500</span><br></pre></td></tr></table></figure>
-<p>生成 <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu.svg" target="_blank" rel="noopener">CPU 火焰图</a></p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu1.png" alt="CPU 火焰图"></p>
-<p>从图中能一眼看到 publish 函数中的压缩操作占了 70% 左右的 CPU。</p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-cpu2.png" alt="CPU 火焰图"></p>
-<p>而 gin httpserver 只占用了 2% 左右的 CPU， 和我们使用 <code>go tool pprof</code> 的 top 命令分析的结果一致。</p>
-<p>默认情况下 go-torch 采集的是 CPU 的 profile， 这里介绍下 mem 火焰图的采集。</p>
-<h3 id="inuse-space-火焰图"><a href="#inuse-space-火焰图" class="headerlink" title="inuse_space 火焰图"></a><code>inuse_space</code> <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-inuse-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -inuse_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-inuse-mem.png" alt="火焰图"></p>
-<h3 id="alloc-space-火焰图"><a href="#alloc-space-火焰图" class="headerlink" title="alloc_space 火焰图"></a><code>alloc_space</code> <a href="http://onepiece.b0.upaiyun.com/assets/logger-normal-alloc-mem.svg" target="_blank" rel="noopener">火焰图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -alloc_space http://127.0.0.1:4500/debug/pprof/heap --colors=mem</span><br></pre></td></tr></table></figure>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-normal-alloc-mem.png" alt="火焰图"></p>
-<h2 id="logger-100-CPU-分析"><a href="#logger-100-CPU-分析" class="headerlink" title="logger 100% CPU 分析"></a>logger 100% CPU 分析</h2><p>前面介绍了 <code>go tool pprof</code> 和火焰图的使用方法，这里使用火焰图复现 logger 100% CPU 问题。</p>
-<p>先看现象， 用 wrk 压测 logger</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t1 -c100 -d30 --script=post.lua &apos;http://127.0.0.1:4500/marco/log&apos;</span><br></pre></td></tr></table></figure>
-<p>查看 CPU 占用情况</p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-high-cpu.png" alt="CPU"></p>
-<p>采集 30s 的 CPU profile <a href="http://onepiece.b0.upaiyun.com/assets/logger-abnormal-cpu.svg" target="_blank" rel="noopener">火焰图</a></p>
-<p><img src="http://onepiece.b0.upaiyun.com/assets/logger-abnormal-cpu.png" alt="火焰图"></p>
-<p>图中红色标记部分 <code>startSink</code> 函数中 <code>runtime.selectgo</code> 消耗了大量 CPU， 而 <code>runtime.selectgo</code> 上面只有 <code>runtime.sellock</code> 和 <code>runtime.selunlock</code> 两个操作，即大量 CPU 耗费在 <code>select</code> 操作上，火焰图呈秃顶状态，即瓶颈所在。</p>
-<p>查看 <code>startSink</code> 实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">for &#123;</span><br><span class="line">    if exit == true &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if moveforward &#123;</span><br><span class="line">        fakeRead = readChan</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        fakeRead = nil</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    select &#123;</span><br><span class="line">    case read := &lt;-fakeRead:</span><br><span class="line">        count++</span><br><span class="line">        buf.Write(read)</span><br><span class="line">    case &lt;-done:</span><br><span class="line">        DiskQueue.Close()</span><br><span class="line">        exit = true</span><br><span class="line">    default:</span><br><span class="line">        //pass</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if count == GlobalConf.CntBatch || exit == true &#123;</span><br><span class="line">        hostPoolResponse := pool.Get()</span><br><span class="line">        addr := hostPoolResponse.Host()</span><br><span class="line">        err := handler.Publish(fmt.Sprintf(&quot;%s%s&quot;， addr， SinkConf.Uri)， buf.Bytes())</span><br><span class="line">        hostPoolResponse.Mark(err)</span><br><span class="line"></span><br><span class="line">        if err != nil &#123;</span><br><span class="line">            Log.Error(&quot;%s&quot;， err.Error())</span><br><span class="line">            moveforward = false</span><br><span class="line">            time.Sleep(1 * time.Second)</span><br><span class="line">            continue</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            moveforward = true</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buf.Reset()</span><br><span class="line">        count = 0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>本希望通过 moveforward 来控制 fakeRead 是否取值，而如果 fakeRead 为 nil 时， 整个 select 会一直阻塞，所以加上了 <code>default</code> 操作，让 select 变成非阻塞，但因为一直没有读取内容，count 没有增加而不会触发 sleep 操作。<em>最终导致非阻塞的 select 一直空转循环，类似一个空 while 循环，占用了大量 CPU</em>。</p>
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>改用其他方法实现这部分逻辑，这里不再贴出来了，重在分享发现问题的过程，改进后的火焰图在前面已给出。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Golang 应用通常只要能编译通过，很少有运行时问题；而当应用遇到高CPU 、高内存占用或者作为 http 服务端响应时间长，QPS 上不去等，且不能 code review 解决时，可以尝试使用<code>pprof</code> 和 <code>Flame-Graph</code> 来分析定位问题，有奇效。当然 Golang 程序的调试及调优还有很多方法，比如直接结合<code>go test</code> 和 <code>benchmark</code>通过测用例分析热点代码、使用<code>go pprof</code>分析汇编代码等。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1784,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1808,7 +1797,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
