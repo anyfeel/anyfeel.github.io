@@ -363,12 +363,24 @@
                 
               
 
-              <time title="创建时间：2018-09-24 11:14:44 / 修改时间：12:57:42" itemprop="dateCreated datePublished" datetime="2018-09-24T11:14:44+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 11:14:44" itemprop="dateCreated datePublished" datetime="2018-09-24T11:14:44+08:00">2018-09-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 14:39:10" itemprop="dateModified" datetime="2018-10-05T14:39:10+08:00">2018-10-05</time>
               
             
           </span>
@@ -425,8 +437,7 @@
 
       
         
-          
-            <h2 id="系统优化的前-5-分钟"><a href="#系统优化的前-5-分钟" class="headerlink" title="系统优化的前 5 分钟"></a>系统优化的前 5 分钟</h2><p><a href="https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55" target="_blank" rel="noopener">使用如下指令了解机器的整体运行情况</a>, <a href="https://segmentfault.com/a/1190000004104493" target="_blank" rel="noopener">此处有指令的中文解释</a></p>
+          <h2 id="系统优化的前-5-分钟"><a href="#系统优化的前-5-分钟" class="headerlink" title="系统优化的前 5 分钟"></a>系统优化的前 5 分钟</h2><p><a href="https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55" target="_blank" rel="noopener">使用如下指令了解机器的整体运行情况</a>, <a href="https://segmentfault.com/a/1190000004104493" target="_blank" rel="noopener">此处有指令的中文解释</a></p>
 <ul>
 <li><code>uptime</code> 检查系统是否宕机重启</li>
 <li><code>dmesg | tail</code>  查看 dmesg 是否有系统层面错误日志</li>
@@ -453,37 +464,13 @@
 <blockquote>
 <p>note：这里显示数据是所有cpu的平均值, 如果想看每一个cpu的处理情况, 按1即可；折叠, 再次按1</p>
 </blockquote>
-<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><h3 id="硬中断"><a href="#硬中断" class="headerlink" title="硬中断"></a>硬中断</h3><ul>
-<li>硬中断是由硬件产生的，比如，像磁盘，网卡，键盘，时钟等。每个设备或设备集都有它自己的IRQ（中断请求）。基于IRQ，CPU可以将相应的请求分发到对应的硬件驱动上（注：硬件驱动通常是内核中的一个子程序，而不是一个独立的进程）。</li>
-<li>处理中断的驱动是需要运行在CPU上的，因此，当中断产生的时候，CPU会中断当前正在运行的任务，来处理中断。在有多核心的系统上，一个中断通常只能中断一颗CPU（也有一种特殊的情况，就是在大型主机上是有硬件通道的，它可以在没有主CPU的支持下，可以同时处理多个中断。）。</li>
-<li>硬中断可以直接中断CPU。它会引起内核中相关的代码被触发。对于那些需要花费一些时间去处理的进程，中断代码本身也可以被其他的硬中断中断。</li>
-<li>对于时钟中断，内核调度代码会将当前正在运行的进程挂起，从而让其他的进程来运行。它的存在是为了让调度代码（或称为调度器）可以调度多任务。</li>
-</ul>
-<h3 id="软中断"><a href="#软中断" class="headerlink" title="软中断"></a>软中断</h3><ul>
-<li>软中断的处理非常像硬中断。然而，它们仅仅是由当前正在运行的进程所产生的。</li>
-<li>通常，软中断是一些对I/O的请求。这些请求会调用内核中可以调度I/O发生的程序。对于某些设备，I/O请求需要被立即处理，而磁盘I/O请求通常可以排队并且可以稍后处理。根据I/O模型的不同，进程或许会被挂起直到I/O完成，此时内核调度器就会选择另一个进程去运行。I/O可以在进程之间产生并且调度过程通常和磁盘I/O的方式是相同。</li>
-<li>软中断仅与内核相联系。而内核主要负责对需要运行的任何其他的进程进行调度。一些内核允许设备驱动的一些部分存在于用户空间，并且当需要的时候内核也会调度这个进程去运行。</li>
-<li>软中断并不会直接中断CPU。也只有当前正在运行的代码（或进程）才会产生软中断。这种中断是一种需要内核为正在运行的进程去做一些事情（通常为I/O）的请求。有一个特殊的软中断是Yield调用，它的作用是请求内核调度器去查看是否有一些其他的进程可以运行。</li>
-</ul>
-<h3 id="释疑"><a href="#释疑" class="headerlink" title="释疑"></a>释疑</h3><blockquote>
-<p>对于软中断，I/O 操作是否是由内核中的 I/O 设备驱动程序完成？</p>
-</blockquote>
-<p>对于 I/O 请求，内核会将这项工作分派给合适的内核驱动程序，这个程序会对 I/O 进行队列化，以可以稍后处理（通常是磁盘I/O），或如果可能可以立即执行它。通常，当对硬中断进行回应的时候，这个队列会被驱动所处理。当一个 I/O 请求完成的时候，下一个在队列中的 I/O 请求就会发送到这个设备上。</p>
-<blockquote>
-<p>软中断所经过的操作流程是比硬中断的少吗？换句话说，对于软中断就是：进程 -&gt; 内核中的设备驱动程序；对于硬中断：硬件 -&gt; CPU 内核中的设备驱动程序？</p>
-</blockquote>
-<p>是的，软中断比硬中断少了一个硬件发送信号的步骤。产生软中断的进程一定是当前正在运行的进程，因此它们不会中断CPU。但是它们会中断调用代码的流程。</p>
-<p>如果硬件需要 CPU 去做一些事情，那么这个硬件会使 CPU 中断当前正在运行的代码。而后 CPU 会将当前正在运行进程的当前状态放到堆栈（stack）中，以至于之后可以返回继续运行。这种中断可以停止一个正在运行的进程；可以停止正处理另一个中断的内核代码；或者可以停止空闲进程。</p>
-<h2 id="查看-cpu-超线程和-cpu-物理核对应关系"><a href="#查看-cpu-超线程和-cpu-物理核对应关系" class="headerlink" title="查看 cpu 超线程和 cpu 物理核对应关系"></a>查看 cpu 超线程和 cpu 物理核对应关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">~$ lscpu</span><br><span class="line">Architecture:        x86_64</span><br><span class="line">CPU op-mode(s):      32-bit, 64-bit</span><br><span class="line">Byte Order:          Little Endian</span><br><span class="line">CPU(s):              2</span><br><span class="line">On-line CPU(s) list: 0,1</span><br><span class="line">Thread(s) per core:  1</span><br><span class="line">Core(s) per socket:  2</span><br><span class="line">Socket(s):           1</span><br><span class="line">NUMA node(s):        1</span><br><span class="line">Vendor ID:           GenuineIntel</span><br><span class="line">CPU family:          6</span><br><span class="line">Model:               61</span><br><span class="line">Model name:          Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz</span><br><span class="line">Stepping:            4</span><br><span class="line">CPU MHz:             2699.998</span><br><span class="line">BogoMIPS:            5399.99</span><br><span class="line">Hypervisor vendor:   KVM</span><br><span class="line">Virtualization type: full</span><br><span class="line">L1d cache:           32K</span><br><span class="line">L1i cache:           32K</span><br><span class="line">L2 cache:            256K</span><br><span class="line">L3 cache:            3072K</span><br><span class="line">NUMA node0 CPU(s):   0,1</span><br><span class="line"></span><br><span class="line">~$ cat /sys/devices/system/node/node1/cpulist</span><br><span class="line">1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39</span><br><span class="line"></span><br><span class="line">~$ cat /sys/devices/system/node/node0/cpulist</span><br><span class="line">0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38</span><br></pre></td></tr></table></figure>
-<p>机器总共有 2 个物理核心，每个物理核心有 10 个逻辑核，每个逻辑核有 2 个超线程</p>
-<h2 id="查看进程和-cpu-亲缘性绑定关系"><a href="#查看进程和-cpu-亲缘性绑定关系" class="headerlink" title="查看进程和 cpu 亲缘性绑定关系"></a>查看进程和 cpu 亲缘性绑定关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ps -eo pid,argssr</span><br><span class="line">pid  - 进程ID</span><br><span class="line">args - 该进程执行时传入的命令行参数</span><br><span class="line">psr  - 分配给进程的逻辑CPU</span><br><span class="line"></span><br><span class="line">~$ ps -eo pid,argssr | grep nginx</span><br><span class="line">9073 nginx: master process /usr/   1</span><br><span class="line">9074 nginx: worker process         0</span><br><span class="line">9075 nginx: worker process         1</span><br><span class="line">9076 nginx: worker process         2</span><br><span class="line">9077 nginx: worker process         3</span><br></pre></td></tr></table></figure>
-<h2 id="查看中断号和-cpu-绑定关系"><a href="#查看中断号和-cpu-绑定关系" class="headerlink" title="查看中断号和 cpu 绑定关系"></a>查看中断号和 cpu 绑定关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~$ cat /proc/interrupts</span><br><span class="line"></span><br><span class="line">            CPU0       CPU1</span><br><span class="line"> 162: 1051061576          0  IR-PCI-MSI-edge      eth0-TxRx-0</span><br><span class="line"> 163:   85025461  133849653  IR-PCI-MSI-edge      eth0-TxRx-1</span><br><span class="line"> 164:   88387458          0  IR-PCI-MSI-edge      eth0-TxRx-2</span><br><span class="line"> 165:  138497867          0  IR-PCI-MSI-edge      eth0-TxRx-3</span><br><span class="line"> 166:  187011870          0  IR-PCI-MSI-edge      eth0-TxRx-4</span><br><span class="line"> 167:   71803161   35003925  IR-PCI-MSI-edge      eth0-TxRx-5</span><br><span class="line"> 168:   65314317          0  IR-PCI-MSI-edge      eth0-TxRx-6</span><br><span class="line"> 169:   64069078          0  IR-PCI-MSI-edge      eth0-TxRx-7</span><br><span class="line"> 170:  138158880          0  IR-PCI-MSI-edge      eth0-TxRx-8</span><br><span class="line"> 171:   40424137   20524266  IR-PCI-MSI-edge      eth0-TxRx-9</span><br><span class="line"> 172:  134531725          0  IR-PCI-MSI-edge      eth0-TxRx-10</span><br><span class="line"></span><br><span class="line">~$ sudo cat /proc/irq/165/smp_affinity</span><br><span class="line">00000000,00000000,00000000,00000000,00000000,00000008</span><br></pre></td></tr></table></figure>
-<p>首先查看系统所有中断号，查看多对列网卡 eth0 的中断号<br>查看中断号分配的 cpu, 0x00000008 代表 cpu 8</p>
-<h2 id="others"><a href="#others" class="headerlink" title="others"></a>others</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ethtools -S eth0 查看网络的队列信息</span><br><span class="line">ethanol -i eth0 查看网卡信息</span><br><span class="line">lspci -vvv 查看pci 相关信息</span><br></pre></td></tr></table></figure>
-<h2 id="iperf-网卡测试"><a href="#iperf-网卡测试" class="headerlink" title="iperf 网卡测试"></a>iperf 网卡测试</h2><p><code>-P</code> 指定一个并发, 如果指定多个并发，统计信息不友好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">iperf -s</span><br><span class="line"></span><br><span class="line">client:</span><br><span class="line">iperf -c 10.200.136.41 -p 5001  -P 1 -t 60 -i 1</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看网卡情况"><a href="#查看网卡情况" class="headerlink" title="查看网卡情况"></a>查看网卡情况</h2><p>netstat 查看 Errors<br>ifconfig 查看 dropped 数量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">~$ watch &apos;netstat -s --udp&apos;</span><br><span class="line">Udp:</span><br><span class="line">    437.0k/s packets received</span><br><span class="line">    0.0/s packets to unknown port received.</span><br><span class="line">    386.9k/s packet receive errors</span><br><span class="line">    0.0/s packets sent</span><br><span class="line">    RcvbufErrors:  123.8k/s</span><br><span class="line">    SndbufErrors: 0</span><br><span class="line">    InCsumErrors: 0</span><br><span class="line"></span><br><span class="line">~$ ifconfig</span><br><span class="line">enp0s8:</span><br><span class="line">    flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">    inet 192.168.56.101  netmask 255.255.255.0  broadcast 192.168.56.255</span><br><span class="line">    inet6 fe80::b5e6:56d6:48dd:e317  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 08:00:27:e6:c8:ac  txqueuelen 1000  (Ethernet)</span><br><span class="line">    RX packets 71  bytes 20634 (20.1 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">    TX packets 81  bytes 13593 (13.2 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/24/linux-system-profile-command/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -598,7 +585,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-25 15:24:07" itemprop="dateModified" datetime="2018-09-25T15:24:07+08:00">2018-09-25</time>
+                <time title="修改时间：2018-10-05 12:11:47" itemprop="dateModified" datetime="2018-10-05T12:11:47+08:00">2018-10-05</time>
               
             
           </span>
@@ -655,46 +642,18 @@
 
       
         
-          
-            <h3 id="print-all-system-information"><a href="#print-all-system-information" class="headerlink" title="print all system information"></a>print all system information</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+          <h3 id="print-all-system-information"><a href="#print-all-system-information" class="headerlink" title="print all system information"></a>print all system information</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
 <h3 id="kernel-version"><a href="#kernel-version" class="headerlink" title="kernel version:"></a>kernel version:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
 <h3 id="see-hardware-info"><a href="#see-hardware-info" class="headerlink" title="see hardware info."></a>see hardware info.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
 <h3 id="count-line"><a href="#count-line" class="headerlink" title="count line"></a>count line</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &apos;\*.c&apos; | xargs wc -l &#123;&#125;\;</span><br></pre></td></tr></table></figure>
 <h3 id="yum-remove-without-dependency"><a href="#yum-remove-without-dependency" class="headerlink" title="yum remove without dependency"></a>yum remove without dependency</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -e --nodeps vim-common-7.4.160-1.el7.x86_64</span><br></pre></td></tr></table></figure>
-<h3 id="fio-test"><a href="#fio-test" class="headerlink" title="fio test"></a>fio test</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/local/bin/fio --filename=/dev/sda --direct=1 --rw=randrw --refill_buffers --norandommap --randrepeat=0 --ioengine=libaio --bs=4k --rwmixread=100 --iodepth=16 --numjobs=16 --runtime=1000 --group_reporting --name=4ktest</span><br></pre></td></tr></table></figure>
-<h3 id="docker-expose-port-to-host-machine"><a href="#docker-expose-port-to-host-machine" class="headerlink" title="docker expose port to host machine"></a>docker expose port to host machine</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:3000 my-image</span><br></pre></td></tr></table></figure>
-<h3 id="docker-get-running-container-bash-cmd"><a href="#docker-get-running-container-bash-cmd" class="headerlink" title="docker get running container bash cmd"></a>docker get running container bash cmd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker  exec -it contained  bash</span><br></pre></td></tr></table></figure>
-<h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any port 9200  -w o.pcap</span><br></pre></td></tr></table></figure>
-<h3 id="批量结束进程"><a href="#批量结束进程" class="headerlink" title="批量结束进程"></a>批量结束进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `ps -ef|grep nginx|grep -v grep |awk &apos;&#123;print $2&#125;&apos;`</span><br></pre></td></tr></table></figure>
-<h3 id="查看进程占用端口"><a href="#查看进程占用端口" class="headerlink" title="查看进程占用端口"></a>查看进程占用端口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep processname</span><br><span class="line">netstat -nap | grep pid</span><br><span class="line"></span><br><span class="line">lsof -i:9090</span><br><span class="line">pwdx 9090</span><br><span class="line">lsof -P 9090 | grep cwd</span><br></pre></td></tr></table></figure>
-<h3 id="vim-replace"><a href="#vim-replace" class="headerlink" title="vim replace"></a>vim replace</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:  %s/\(randrecord\.get(&apos;ip&apos;)\)/ptest\.\1/g</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将文件中的所有 randrecord.get(‘ip’)  替换为 test.randrecord.get(‘ip’)，即使用 \1  \2 等可以匹配前面第几个括号内的内容，此括号需要使用 反斜杠 转意</p>
-</blockquote>
-<h3 id="查看-glibc-版本"><a href="#查看-glibc-版本" class="headerlink" title="查看 glibc 版本"></a>查看 glibc 版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /lib64/libc.so.6 |grep GLIBC</span><br></pre></td></tr></table></figure>
-<h3 id="linux-将标出输出重定向到-dev-null"><a href="#linux-将标出输出重定向到-dev-null" class="headerlink" title="linux 将标出输出重定向到 /dev/null"></a>linux 将标出输出重定向到 /dev/null</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2&gt;&amp; 1</span><br></pre></td></tr></table></figure>
-<h3 id="awk-打印奇偶行"><a href="#awk-打印奇偶行" class="headerlink" title="awk 打印奇偶行"></a>awk 打印奇偶行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $0 &gt; NR%2&#125;&apos;  file</span><br></pre></td></tr></table></figure>
-<h3 id="sort-by-frequence"><a href="#sort-by-frequence" class="headerlink" title="sort by frequence"></a>sort by frequence</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat tmp.txt| sort | uniq -c | sort -k1,1nr  | head -30 &gt; stoplist.txt</span><br></pre></td></tr></table></figure>
-<h3 id="filter-by-stoplist"><a href="#filter-by-stoplist" class="headerlink" title="filter by stoplist"></a>filter by stoplist</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tr &apos; &apos; &apos;\n&apos; &lt; stoplist.txt | grep -vwFf - tmp.txt</span><br></pre></td></tr></table></figure>
-<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep zicogo | awk &apos;BEGIN&#123;sum=&quot;&quot;&#125;&#123;sum=($2&quot;,&quot;sum)&#125;END&#123;print sum&#125;&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="按组统计求和"><a href="#按组统计求和" class="headerlink" title="按组统计求和"></a>按组统计求和</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;s[$1] += $2; a[$1] += $3 &#125;END&#123; for(i in s)&#123;  printf &quot;%-50s %-20d %-20d\n&quot;, i,s[i],a[i] &#125; &#125;&apos; upstats-2017-07-05-15-05.log+</span><br></pre></td></tr></table></figure>
-<h3 id="查看某个库的版本号"><a href="#查看某个库的版本号" class="headerlink" title="查看某个库的版本号"></a>查看某个库的版本号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldconfig -p | grep libssl</span><br></pre></td></tr></table></figure>
-<h3 id="删除-archlinux-软件包"><a href="#删除-archlinux-软件包" class="headerlink" title="删除 archlinux 软件包"></a>删除 archlinux 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Scc</span><br></pre></td></tr></table></figure>
-<h3 id="history-clean"><a href="#history-clean" class="headerlink" title="history clean"></a>history clean</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .zsh_history  |  awk &apos;BEGIN&#123;FS=&quot;&quot;&#125;&#123;if (NF &gt; 40 ) print ;&#125;&apos; &gt;&gt; .zsh_history_new</span><br></pre></td></tr></table></figure>
-<h3 id="brew-install"><a href="#brew-install" class="headerlink" title="brew install"></a>brew install</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-lua --with-override-system-vi  --build-from-source</span><br></pre></td></tr></table></figure>
-<h4 id="global-floder-sed"><a href="#global-floder-sed" class="headerlink" title="global floder sed"></a>global floder sed</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/TINY/NOX/g&quot; `grep -R TINY -rl ./`</span><br></pre></td></tr></table></figure>
-<h4 id="批量查找替换"><a href="#批量查找替换" class="headerlink" title="批量查找替换"></a>批量查找替换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find CHANGELOG.md -type f -exec vim +&quot;retab | wq&quot; &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-<h4 id="查看用户所属组"><a href="#查看用户所属组" class="headerlink" title="查看用户所属组"></a>查看用户所属组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id -g -n $whoami</span><br></pre></td></tr></table></figure>
-<h4 id="列出-osx-系统的-java-版本"><a href="#列出-osx-系统的-java-版本" class="headerlink" title="列出 osx 系统的 java 版本"></a>列出 osx 系统的 java 版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/java_home -V</span><br></pre></td></tr></table></figure>
-<h4 id="列出-java-的信任证书"><a href="#列出-java-的信任证书" class="headerlink" title="列出 java 的信任证书"></a>列出 java 的信任证书</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/security/cacerts</span><br></pre></td></tr></table></figure>
-<h4 id="java-导入证书"><a href="#java-导入证书" class="headerlink" title="java 导入证书"></a>java 导入证书</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -import -trustcacerts -file [certificate] -alias [alias] -keystore $JAVA_HOME/lib/security/cacerts</span><br></pre></td></tr></table></figure>
-<h3 id="vim-highlight"><a href="#vim-highlight" class="headerlink" title="vim highlight"></a>vim highlight</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:so $VIMRUNTIME/syntax/hitest.vim</span><br></pre></td></tr></table></figure>
-<h3 id="check-cpu-info"><a href="#check-cpu-info" class="headerlink" title="check cpu info"></a>check cpu info</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo dmidecode -t 4 | grep -E &apos;Socket Designation|Count&apos;</span><br><span class="line">    Socket Designation: CPU1</span><br><span class="line">    Core Count: 8</span><br><span class="line">    Thread Count: 16</span><br><span class="line">    Socket Designation: CPU2</span><br><span class="line">    Core Count: 8</span><br><span class="line">    Thread Count: 16</span><br><span class="line"></span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-<h3 id="awk-和-grep-日志统计分析"><a href="#awk-和-grep-日志统计分析" class="headerlink" title="awk 和 grep 日志统计分析"></a>awk 和 grep 日志统计分析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat nginx/logs/access.log  |   grep &quot;17/Sep&quot;  | grep -v &apos;2\.43&apos; | awk  &apos;&#123;if ($11 &gt; 1) print $0&#125;&apos;</span><br><span class="line">cat nginx/logs/access.log  |   grep &quot;17/Sep&quot; | grep -v &apos;2\.43&apos; | awk  &apos;BEGIN&#123;a=0&#125;&#123;if ($11&gt;0+a) a=$11&#125; END&#123;print a&#125;&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="centos-查看某个库是哪个-package-提供的"><a href="#centos-查看某个库是哪个-package-提供的" class="headerlink" title="centos 查看某个库是哪个 package 提供的"></a>centos 查看某个库是哪个 package 提供的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum whatprovides libpci.so.3</span><br></pre></td></tr></table></figure>
-<h3 id="查看-PPID"><a href="#查看-PPID" class="headerlink" title="查看 PPID"></a>查看 PPID</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -&gt; G -&gt; 2</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/24/linux-command-note/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1153,12 +1112,24 @@
                 
               
 
-              <time title="创建时间：2018-09-24 09:50:39 / 修改时间：10:39:01" itemprop="dateCreated datePublished" datetime="2018-09-24T09:50:39+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 09:50:39" itemprop="dateCreated datePublished" datetime="2018-09-24T09:50:39+08:00">2018-09-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -1215,21 +1186,18 @@
 
       
         
-          
-            <h2 id="初始化核心函数"><a href="#初始化核心函数" class="headerlink" title="初始化核心函数"></a>初始化核心函数</h2><p><code>ngx_init_cycle()(ngx_cycle.c:275)</code> -&gt; <code>ngx_conf_parse()(ngx_conf_file.c:)</code> -&gt; <code>ngx_conf_handler()</code></p>
+          <h2 id="初始化核心函数"><a href="#初始化核心函数" class="headerlink" title="初始化核心函数"></a>初始化核心函数</h2><p><code>ngx_init_cycle()(ngx_cycle.c:275)</code> -&gt; <code>ngx_conf_parse()(ngx_conf_file.c:)</code> -&gt; <code>ngx_conf_handler()</code></p>
 <h2 id="初始化步骤"><a href="#初始化步骤" class="headerlink" title="初始化步骤"></a>初始化步骤</h2><ul>
-<li><p>modules 和序号绑定关系</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ngx_int_t</span><br><span class="line">ngx_preinit_modules(void)</span><br><span class="line">&#123;</span><br><span class="line">    ngx_uint_t  i;</span><br><span class="line"></span><br><span class="line">    for (i = 0; ngx_modules[i]; i++) &#123;</span><br><span class="line">        ngx_modules[i]-&gt;index = i;</span><br><span class="line">        ngx_modules[i]-&gt;name = ngx_module_names[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ngx_modules_n = i;</span><br><span class="line">    ngx_max_module = ngx_modules_n + NGX_MAX_DYNAMIC_MODULES;</span><br><span class="line"></span><br><span class="line">    return NGX_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>ngx_init_cycle</code> 初始化核心模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">for (i = 0; cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">	if (cycle-&gt;modules[i]-&gt;type != NGX_CORE_MODULE) &#123;</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	module = cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">	if (module-&gt;create_conf) &#123;</span><br><span class="line">		rv = module-&gt;create_conf(cycle);</span><br><span class="line">		if (rv == NULL) &#123;</span><br><span class="line">			ngx_destroy_pool(pool);</span><br><span class="line">			return NULL;</span><br><span class="line">		&#125;</span><br><span class="line">		cycle-&gt;conf_ctx[cycle-&gt;modules[i]-&gt;index] = rv;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">for (i = 0; cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">	if (cycle-&gt;modules[i]-&gt;type != NGX_CORE_MODULE) &#123;  // NGX_CORE_MODULE 核心模块</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	module = cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">	if (module-&gt;init_conf) &#123;</span><br><span class="line">		if (module-&gt;init_conf(cycle,</span><br><span class="line">							  cycle-&gt;conf_ctx[cycle-&gt;modules[i]-&gt;index]) // 初始化</span><br><span class="line">			== NGX_CONF_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			environ = senv;</span><br><span class="line">			ngx_destroy_cycle_pools(&amp;conf);</span><br><span class="line">			return NULL;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>调用 ngx_events_block 来解析具体模块如配置和指令, 以 event 模块为例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">static char *</span><br><span class="line">ngx_events_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    *(void **) conf = ctx;</span><br><span class="line"></span><br><span class="line">    for (i = 0; cf-&gt;cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">        if (cf-&gt;cycle-&gt;modules[i]-&gt;type != NGX_EVENT_MODULE) &#123;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        m = cf-&gt;cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">        if (m-&gt;create_conf) &#123;</span><br><span class="line">            (*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index] =</span><br><span class="line">                                                     m-&gt;create_conf(cf-&gt;cycle);  // 为每个 event 模块分配内存</span><br><span class="line">            if ((*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index] == NULL) &#123;</span><br><span class="line">                return NGX_CONF_ERROR;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pcf = *cf;</span><br><span class="line">    cf-&gt;ctx = ctx;</span><br><span class="line">    cf-&gt;module_type = NGX_EVENT_MODULE;</span><br><span class="line">    cf-&gt;cmd_type = NGX_EVENT_CONF;</span><br><span class="line"></span><br><span class="line">    rv = ngx_conf_parse(cf, NULL);  // 解析 event 模块，如 `work_connections`</span><br><span class="line"></span><br><span class="line">    *cf = pcf;</span><br><span class="line"></span><br><span class="line">    if (rv != NGX_CONF_OK) &#123;</span><br><span class="line">        return rv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (i = 0; cf-&gt;cycle-&gt;modules[i]; i++) &#123;</span><br><span class="line">        if (cf-&gt;cycle-&gt;modules[i]-&gt;type != NGX_EVENT_MODULE) &#123;</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        m = cf-&gt;cycle-&gt;modules[i]-&gt;ctx;</span><br><span class="line"></span><br><span class="line">        if (m-&gt;init_conf) &#123;</span><br><span class="line">            rv = m-&gt;init_conf(cf-&gt;cycle,</span><br><span class="line">                              (*ctx)[cf-&gt;cycle-&gt;modules[i]-&gt;ctx_index]); // 和指令默认值对比，设置指令的值</span><br><span class="line">            if (rv != NGX_CONF_OK) &#123;</span><br><span class="line">                return rv;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return NGX_CONF_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>modules 和序号绑定关系<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ngx_int_t</span><br><span class="line">ngx_preinit_modules(void)</span><br><span class="line">&#123;</span><br><span class="line">    ngx_uint_t  i;</span><br><span class="line"></span><br><span class="line">    for (i = 0; ngx_modules[i]; i++) &#123;</span><br><span class="line">        ngx_modules[i]-&gt;index = i;</span><br><span class="line">        ngx_modules[i]-&gt;name = ngx_module_names[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ngx_modules_n = i;</span><br><span class="line">    ngx_max_module = ngx_modules_n + NGX_MAX_DYNAMIC_MODULES;</span><br><span class="line"></span><br><span class="line">    return NGX_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/24/nginx-module-init/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1327,12 +1295,24 @@
                 
               
 
-              <time title="创建时间：2018-09-24 09:41:42 / 修改时间：09:48:57" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 09:41:42" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">2018-09-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -1389,8 +1369,7 @@
 
       
         
-          
-            <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ol>
+          <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ol>
 <li>五层架构与七层架构</li>
 <li>链路层作用 ARP，以太网包格式</li>
 <li>IP/TCP 格式</li>
@@ -1403,16 +1382,14 @@
 <p>note:so_linger 作用： 发送 RST 包来断开连接，而不是发送 FIN.</p>
 </blockquote>
 <h2 id="connect-resty-by-peer"><a href="#connect-resty-by-peer" class="headerlink" title="connect resty by peer"></a>connect resty by peer</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>本端向对端发送数据，但对端无法识别该连接，返回一个 RST 强制关闭连接</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ul>
-<li>当尝试和未开放的服务器端口建立tcp连接时，服务器tcp将会直接向客户端发送reset报文，表现状态是连接决绝。</li>
-<li>双方之前已经正常建立了通信通道，也可能进行过了交互，当某一方在交互的过程中发生了异常，如崩溃等，异常的一方会向对端发送reset报文，通知对方将连接关闭</li>
-<li>当收到TCP报文，但是发现该报文不是已建立的TCP连接列表可处理的，则其直接向对端发送reset报文</li>
-<li>ack报文丢失，并且超出一定的重传次数或时间后，会主动向对端发送reset报文释放该TCP连接</li>
-<li>一端设置了 SO_LINGER 选项来关闭连接，则对端会收到 connection by peer 错误来关闭连接</li>
-</ul>
-<h2 id="TCP-状态机"><a href="#TCP-状态机" class="headerlink" title="TCP 状态机"></a>TCP 状态机</h2><p><img src="http://onepiece.nos-eastchina1.126.net/images/tcp-status.jpeg" alt="tcp 状态机"></p>
-
-          
+<p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/24/tcp-connection-status/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1884,12 +1861,24 @@
                 
               
 
-              <time title="创建时间：2018-09-23 18:27:58 / 修改时间：18:28:14" itemprop="dateCreated datePublished" datetime="2018-09-23T18:27:58+08:00">2018-09-23</time>
+              <time title="创建时间：2018-09-23 18:27:58" itemprop="dateCreated datePublished" datetime="2018-09-23T18:27:58+08:00">2018-09-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -1946,25 +1935,16 @@
 
       
         
-          
-            <h1 id="components"><a href="#components" class="headerlink" title="components"></a>components</h1><h2 id="nsqd"><a href="#nsqd" class="headerlink" title="nsqd"></a>nsqd</h2><p>nsqd is the daemon that receives, queues, and delivers messages to clients.<br>two tcp ports: one for clients and one for HTTP API</p>
+          <h1 id="components"><a href="#components" class="headerlink" title="components"></a>components</h1><h2 id="nsqd"><a href="#nsqd" class="headerlink" title="nsqd"></a>nsqd</h2><p>nsqd is the daemon that receives, queues, and delivers messages to clients.<br>two tcp ports: one for clients and one for HTTP API</p>
 <h2 id="nsqlookupd"><a href="#nsqlookupd" class="headerlink" title="nsqlookupd"></a>nsqlookupd</h2><p>the daemon that manages topology information.<br>Clients query nsqlookupd to discover nsqd producers for a specific topic and nsqd nodes broadcasts topic and channel information.<br>two interfaces: A TCP interface which is used by nsqd for broadcasts and an HTTP interface for clients to perform discovery and administrative actions.</p>
 <h2 id="nsqadmin"><a href="#nsqadmin" class="headerlink" title="nsqadmin"></a>nsqadmin</h2><p>Web UI to view aggregated cluster stats in realtime and perform various administrative tasks</p>
-<h1 id="run-nsq"><a href="#run-nsq" class="headerlink" title="run nsq"></a>run nsq</h1><h2 id="get-nsq-docker-image"><a href="#get-nsq-docker-image" class="headerlink" title="get nsq docker image"></a>get nsq docker image</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nsqio/nsq</span><br></pre></td></tr></table></figure>
-<h2 id="run-nsqlookupd"><a href="#run-nsqlookupd" class="headerlink" title="run nsqlookupd"></a>run nsqlookupd</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name lookupd -d -p 4160:4160 -p 4161:4161 nsqio/nsq /nsqlookupd</span><br></pre></td></tr></table></figure>
-<h2 id="run-nsqd"><a href="#run-nsqd" class="headerlink" title="run nsqd"></a>run nsqd</h2><ol>
-<li><p>get docker host’s ip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig | grep docker addr  -&gt; 172.17.0.1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>run nsqd container</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nsqd -d -p 4150:4150 -p 4151:4151  nsqio/nsq /nsqd</span><br><span class="line">    --broadcast-address=&lt;host&gt; --lookupd-tcp-address=&lt;host&gt;:&lt;port&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nsqd -d -p 4150:4150 -p 4151:4151  nsqio/nsq /nsqd</span><br><span class="line">    --broadcast-address=172.17.0.1 --lookupd-tcp-address=172.17.0.1:4160</span><br></pre></td></tr></table></figure></p>
-<p>note:<br>a. no care for 4150 and 4151<br>b. –broadcast-address set to the docker addr<br>c. –lookupd-tcp-address set to the nsqlookupd http listen port, here is 4161</p>
-<h2 id="run-nsqadmin"><a href="#run-nsqadmin" class="headerlink" title="run nsqadmin"></a>run nsqadmin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nsqadmin -p 4171:4171 nsqio/nsq /nsqadmin  --lookupd-http-address=172.17.0.1:4161</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/run-nsq-by-docker/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2062,12 +2042,24 @@
                 
               
 
-              <time title="创建时间：2018-09-23 18:26:37 / 修改时间：18:27:24" itemprop="dateCreated datePublished" datetime="2018-09-23T18:26:37+08:00">2018-09-23</time>
+              <time title="创建时间：2018-09-23 18:26:37" itemprop="dateCreated datePublished" datetime="2018-09-23T18:26:37+08:00">2018-09-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -2124,21 +2116,19 @@
 
       
         
-          
-            <h2 id="系统的编码方式"><a href="#系统的编码方式" class="headerlink" title="系统的编码方式"></a>系统的编码方式</h2><p>在我所使用的 centos6 中使用 echo $LANG 查看编码<br>系统的编码方式决定了在终端中录入的内容的编码方式</p>
+          <h2 id="系统的编码方式"><a href="#系统的编码方式" class="headerlink" title="系统的编码方式"></a>系统的编码方式</h2><p>在我所使用的 centos6 中使用 echo $LANG 查看编码<br>系统的编码方式决定了在终端中录入的内容的编码方式</p>
 <h2 id="编辑器所使用的文件编码方式"><a href="#编辑器所使用的文件编码方式" class="headerlink" title="编辑器所使用的文件编码方式"></a>编辑器所使用的文件编码方式</h2><p>在 vim 中，set fileencoding  查看当前编码方式<br>编辑器的编码方式决定了在代码中录入内容的编码方式，如 <code>a[‘key’] = value</code>，此时的 ‘key’ 字段按照 fileencoding 的方式编码</p>
 <h2 id="代码中使用的编码方式"><a href="#代码中使用的编码方式" class="headerlink" title="代码中使用的编码方式"></a>代码中使用的编码方式</h2><p>例如 <code>if a == b : pass</code>，此内容的编码方式</p>
 <h2 id="从文件中读取的内容的编码方式"><a href="#从文件中读取的内容的编码方式" class="headerlink" title="从文件中读取的内容的编码方式"></a>从文件中读取的内容的编码方式</h2><p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis_cli&gt;&gt;</span><br><span class="line">      set  “marco:domains” “basic.b0.upaiyun.com” “basic&quot;</span><br></pre></td></tr></table></figure></p>
 <p>此写入redis的内容，根据终端的编码方式决定， 我的系统默认是utf-8 ，所以此处也是utf-8内容</p>
-<h2 id="解释器的编码方式"><a href="#解释器的编码方式" class="headerlink" title="解释器的编码方式"></a>解释器的编码方式</h2><p>python 解释器使用 unicode  编码方式解释执行</p>
-<p>note:<br>在我使用的环境中为 centos + vim 开发环境，处处是 utf-8 编码</p>
-<h2 id="python-编码中文处理"><a href="#python-编码中文处理" class="headerlink" title="python 编码中文处理"></a>python 编码中文处理</h2><ul>
-<li>总体思路：程序整体内部使用 python 解释器的内建 ascii, 在文件落地本地存储的时候再转存为 utf-8</li>
-<li>在处理中文字符串的时候，由于系统编码的差异直接使用 string 类型表示中文的时候错误，使用 unicode 表示。</li>
-<li>使用 str.decode(‘utf-8’)转换为 unicode object</li>
-</ul>
-
-          
+<p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/Linux-encode-thinking/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

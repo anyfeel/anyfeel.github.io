@@ -115,7 +115,7 @@
 <meta property="og:description" content="要点 五层架构与七层架构 链路层作用 ARP，以太网包格式 IP/TCP 格式 TCP 状态机及常用的错误码，time_wait 相关系，SO_RESUSEADDR 作用。 NAGEL 算法(TCP_NODELAY关闭NAGEL)滑动窗口拥塞避免（慢启动），快速重传与快速恢复，选择重传 四种定时器的作用 ACK 定时器，persist 定时器，keep-alive 定时器，2MSL 定时器 使用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/tcp-status.jpeg">
-<meta property="og:updated_time" content="2018-09-24T01:48:57.431Z">
+<meta property="og:updated_time" content="2018-10-05T04:13:51.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接状态整理">
 <meta name="twitter:description" content="要点 五层架构与七层架构 链路层作用 ARP，以太网包格式 IP/TCP 格式 TCP 状态机及常用的错误码，time_wait 相关系，SO_RESUSEADDR 作用。 NAGEL 算法(TCP_NODELAY关闭NAGEL)滑动窗口拥塞避免（慢启动），快速重传与快速恢复，选择重传 四种定时器的作用 ACK 定时器，persist 定时器，keep-alive 定时器，2MSL 定时器 使用">
@@ -362,12 +362,24 @@
                 
               
 
-              <time title="创建时间：2018-09-24 09:41:42 / 修改时间：09:48:57" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 09:41:42" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">2018-09-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -436,6 +448,7 @@
 <p>note:so_linger 作用： 发送 RST 包来断开连接，而不是发送 FIN.</p>
 </blockquote>
 <h2 id="connect-resty-by-peer"><a href="#connect-resty-by-peer" class="headerlink" title="connect resty by peer"></a>connect resty by peer</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>本端向对端发送数据，但对端无法识别该连接，返回一个 RST 强制关闭连接</p>
+<p><a id="more"></a> &gt;</p>
 <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ul>
 <li>当尝试和未开放的服务器端口建立tcp连接时，服务器tcp将会直接向客户端发送reset报文，表现状态是连接决绝。</li>
 <li>双方之前已经正常建立了通信通道，也可能进行过了交互，当某一方在交互的过程中发生了异常，如崩溃等，异常的一方会向对端发送reset报文，通知对方将连接关闭</li>

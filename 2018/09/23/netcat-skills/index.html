@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="冰澜">
 <meta property="og:description" content="Linux netcat 命令实例：端口扫描端口扫描经常被系统管理员和黑客用来发现在一些机器上开放的端口，帮助他们识别系统中的漏洞。 $nc -z -v -n 172.31.100.7 21-25 可以运行在TCP或者UDP模式，默认是TCP，-u参数调整为udp. z 参数告诉netcat使用0 IO,连接成功后立即关闭连接， 不进行数据交换 v 参数指使用冗余选项 n 参数告诉netcat 不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-23T10:24:52.634Z">
+<meta property="og:updated_time" content="2018-10-05T04:13:51.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="netcat skills ">
 <meta name="twitter:description" content="Linux netcat 命令实例：端口扫描端口扫描经常被系统管理员和黑客用来发现在一些机器上开放的端口，帮助他们识别系统中的漏洞。 $nc -z -v -n 172.31.100.7 21-25 可以运行在TCP或者UDP模式，默认是TCP，-u参数调整为udp. z 参数告诉netcat使用0 IO,连接成功后立即关闭连接， 不进行数据交换 v 参数指使用冗余选项 n 参数告诉netcat 不">
@@ -360,12 +360,24 @@
                 
               
 
-              <time title="创建时间：2018-09-23 18:24:25 / 修改时间：18:24:52" itemprop="dateCreated datePublished" datetime="2018-09-23T18:24:25+08:00">2018-09-23</time>
+              <time title="创建时间：2018-09-23 18:24:25" itemprop="dateCreated datePublished" datetime="2018-09-23T18:24:25+08:00">2018-09-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 12:13:51" itemprop="dateModified" datetime="2018-10-05T12:13:51+08:00">2018-10-05</time>
               
             
           </span>
@@ -431,6 +443,7 @@
 <p>一旦你发现开放的端口，你可以容易的使用netcat 连接服务抓取他们的banner。</p>
 <p><code>$ nc -v 172.31.100.7 21</code></p>
 <p>netcat 命令会连接开放端口21并且打印运行在这个端口上服务的banner信息。</p>
+<p><a id="more"></a> &gt;</p>
 <h2 id="Chat-Server"><a href="#Chat-Server" class="headerlink" title="Chat Server"></a>Chat Server</h2><p>假如你想和你的朋友聊聊，有很多的软件和信息服务可以供你使用。但是，如果你没有这么奢侈的配置，比如你在计算机实验室，所有的对外的连接都是被限制的，你怎样和整天坐在隔壁房间的朋友沟通那？不要郁闷了，netcat提供了这样一种方法，你只需要创建一个Chat服务器，一个预先确定好的端口，这样子他就可以联系到你了。</p>
 <p>Server<br><code>$nc -l 1567</code><br>netcat 命令在1567端口启动了一个tcp 服务器，所有的标准输出和输入会输出到该端口。输出和输入都在此shell中展示。</p>
 <p>Client<br><code>$nc 172.31.100.7 1567</code><br>不管你在机器B上键入什么都会出现在机器A上。</p>

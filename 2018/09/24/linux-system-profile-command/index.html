@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="冰澜">
 <meta property="og:description" content="系统优化的前 5 分钟使用如下指令了解机器的整体运行情况, 此处有指令的中文解释  uptime 检查系统是否宕机重启 dmesg | tail  查看 dmesg 是否有系统层面错误日志 vmstat 1 检查 cpu 的负载情况, 是否存在 cpu 饱和 mpstat -P ALL 1 检查CPU是否存在负载不均衡; 单个过于忙碌的CPU可能意味着整个应用只有单个线程在工作 pidstat 1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-24T04:57:42.167Z">
+<meta property="og:updated_time" content="2018-10-05T06:39:10.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 系统优化指令杂记">
 <meta name="twitter:description" content="系统优化的前 5 分钟使用如下指令了解机器的整体运行情况, 此处有指令的中文解释  uptime 检查系统是否宕机重启 dmesg | tail  查看 dmesg 是否有系统层面错误日志 vmstat 1 检查 cpu 的负载情况, 是否存在 cpu 饱和 mpstat -P ALL 1 检查CPU是否存在负载不均衡; 单个过于忙碌的CPU可能意味着整个应用只有单个线程在工作 pidstat 1">
@@ -360,12 +360,24 @@
                 
               
 
-              <time title="创建时间：2018-09-24 11:14:44 / 修改时间：12:57:42" itemprop="dateCreated datePublished" datetime="2018-09-24T11:14:44+08:00">2018-09-24</time>
+              <time title="创建时间：2018-09-24 11:14:44" itemprop="dateCreated datePublished" datetime="2018-09-24T11:14:44+08:00">2018-09-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-05 14:39:10" itemprop="dateModified" datetime="2018-10-05T14:39:10+08:00">2018-10-05</time>
               
             
           </span>
@@ -448,6 +460,7 @@
 <blockquote>
 <p>note：这里显示数据是所有cpu的平均值, 如果想看每一个cpu的处理情况, 按1即可；折叠, 再次按1</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><h3 id="硬中断"><a href="#硬中断" class="headerlink" title="硬中断"></a>硬中断</h3><ul>
 <li>硬中断是由硬件产生的，比如，像磁盘，网卡，键盘，时钟等。每个设备或设备集都有它自己的IRQ（中断请求）。基于IRQ，CPU可以将相应的请求分发到对应的硬件驱动上（注：硬件驱动通常是内核中的一个子程序，而不是一个独立的进程）。</li>
 <li>处理中断的驱动是需要运行在CPU上的，因此，当中断产生的时候，CPU会中断当前正在运行的任务，来处理中断。在有多核心的系统上，一个中断通常只能中断一颗CPU（也有一种特殊的情况，就是在大型主机上是有硬件通道的，它可以在没有主CPU的支持下，可以同时处理多个中断。）。</li>
