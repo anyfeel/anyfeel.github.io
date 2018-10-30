@@ -106,23 +106,30 @@
 
 
 
-  <meta name="description" content="我就是我，是颜色不一样的烟花">
-<meta property="og:type" content="website">
-<meta property="og:title" content="冰澜">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="目录 OpenResty 发展起源 OpenResty 之 lua 编程 OpenResty 模块编写 OpenResty 核心原理 OpenResty hooks OpenResty 开发常见陷阱 OpenResty 编程优化 OpenResty 易混易错配置解析 nginx 维护与更新  OpenResty 发展起源 OpenResty(也称为 ngx_openresty)是一个全功能的 We">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenResty Best Practice">
+<meta property="og:url" content="http://yoursite.com/2018/10/31/OpenResty-Best-Practice/index.html">
 <meta property="og:site_name" content="冰澜">
-<meta property="og:description" content="我就是我，是颜色不一样的烟花">
+<meta property="og:description" content="目录 OpenResty 发展起源 OpenResty 之 lua 编程 OpenResty 模块编写 OpenResty 核心原理 OpenResty hooks OpenResty 开发常见陷阱 OpenResty 编程优化 OpenResty 易混易错配置解析 nginx 维护与更新  OpenResty 发展起源 OpenResty(也称为 ngx_openresty)是一个全功能的 We">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://onepiece.nos-eastchina1.126.net/images/nginx-architecture.png?imageView&thumbnail=900x0">
+<meta property="og:image" content="https://onepiece.nos-eastchina1.126.net/images/nginx-http-request.png?imageView&thumbnail=900x0">
+<meta property="og:image" content="https://onepiece.nos-eastchina1.126.net/images/nginx-event-loop.png?imageView&thumbnail=900x0">
+<meta property="og:image" content="https://onepiece.nos-eastchina1.126.net/images/lua-coroutines.png?imageView&thumbnail=900x0">
+<meta property="og:image" content="https://onepiece.nos-eastchina1.126.net/images/lua-resty-phase.png?imageView&thumbnail=900x0">
+<meta property="og:updated_time" content="2018-10-30T16:02:09.098Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冰澜">
-<meta name="twitter:description" content="我就是我，是颜色不一样的烟花">
+<meta name="twitter:title" content="OpenResty Best Practice">
+<meta name="twitter:description" content="目录 OpenResty 发展起源 OpenResty 之 lua 编程 OpenResty 模块编写 OpenResty 核心原理 OpenResty hooks OpenResty 开发常见陷阱 OpenResty 编程优化 OpenResty 易混易错配置解析 nginx 维护与更新  OpenResty 发展起源 OpenResty(也称为 ngx_openresty)是一个全功能的 We">
+<meta name="twitter:image" content="http://onepiece.nos-eastchina1.126.net/images/nginx-architecture.png?imageView&thumbnail=900x0">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/31/OpenResty-Best-Practice/"/>
 
 
 
@@ -132,7 +139,7 @@
   };
 </script>
 
-  <title>冰澜</title>
+  <title>OpenResty Best Practice | 冰澜</title>
   
 
 
@@ -179,8 +186,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,7 +223,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
@@ -300,9 +306,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -334,11 +340,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/OpenResty-Best-Practice/" itemprop="url">
-                  OpenResty Best Practice
-                </a>
+          <h2 class="post-title" itemprop="name headline">OpenResty Best Practice
               
             
           </h2>
@@ -424,9 +426,7 @@
       
 
       
-        
-          
-            <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="#anchor1">OpenResty 发展起源</a></li>
 <li><a href="#anchor2">OpenResty 之 lua 编程</a></li>
 <li><a href="#anchor3">OpenResty 模块编写</a></li>
@@ -763,8 +763,6 @@
 <li><a href="http://io.upyun.com/2017/08/19/nginx-signals/" target="_blank" rel="noopener">浅谈 nginx 信号集</a></li>
 </ul>
 
-          
-        
       
     </div>
 
@@ -784,586 +782,28 @@
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/linux-system-profile-command/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/linux-system-profile-command/" itemprop="url">
-                  Linux 系统优化指令杂记
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 11:14:44" itemprop="dateCreated datePublished" datetime="2018-09-24T11:14:44+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-05 14:39:10" itemprop="dateModified" datetime="2018-10-05T14:39:10+08:00">2018-10-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/linux-system-profile-command/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/linux-system-profile-command/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/linux-system-profile-command/" class="leancloud_visitors" data-flag-title="Linux 系统优化指令杂记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
-        
-          <h2 id="系统优化的前-5-分钟"><a href="#系统优化的前-5-分钟" class="headerlink" title="系统优化的前 5 分钟"></a>系统优化的前 5 分钟</h2><p><a href="https://medium.com/netflix-techblog/linux-performance-analysis-in-60-000-milliseconds-accc10403c55" target="_blank" rel="noopener">使用如下指令了解机器的整体运行情况</a>, <a href="https://segmentfault.com/a/1190000004104493" target="_blank" rel="noopener">此处有指令的中文解释</a></p>
-<ul>
-<li><code>uptime</code> 检查系统是否宕机重启</li>
-<li><code>dmesg | tail</code>  查看 dmesg 是否有系统层面错误日志</li>
-<li><code>vmstat 1</code> 检查 cpu 的负载情况, 是否存在 cpu 饱和</li>
-<li><code>mpstat -P ALL 1</code> 检查CPU是否存在负载不均衡; 单个过于忙碌的CPU可能意味着整个应用只有单个线程在工作</li>
-<li><code>pidstat 1</code> 观察随时间变化的 cpu、内存等信息</li>
-<li><code>iostat -xz 1</code> 弄清块设备（磁盘）的状况, 包括工作负载和处理性能</li>
-<li><code>free -m</code> 查看剩余内存, 文件和 IO 缓存大小</li>
-<li><code>sar -n DEV 1</code> 检查网络流量的工作负载：rxkB/s和txkB/s, 以及它是否达到限额了</li>
-<li><code>sar -n TCP,ETCP 1</code> 查看系统网络负载, 过多重传可能是服务器过载开始丢包了</li>
-<li><code>top</code> 没什么好多, 大家都会用的</li>
-</ul>
-<h2 id="top-各个指标含义"><a href="#top-各个指标含义" class="headerlink" title="top 各个指标含义"></a>top 各个指标含义</h2><ul>
-<li>Cpu(s)：表示这一行显示CPU总体信息</li>
-<li>0.0%us：用户态进程占用CPU时间百分比, 不包含renice值为负的任务占用的CPU的时间。</li>
-<li>0.7%sy：内核占用CPU时间百分比</li>
-<li>0.0%ni：改变过优先级的进程占用CPU的百分比</li>
-<li>99.3%id：空闲CPU时间百分比</li>
-<li>0.0%wa：等待I/O的CPU时间百分比</li>
-<li>0.0%hi： CPU硬中断时间百分比</li>
-<li>0.0%si： CPU软中断时间百分比</li>
-<li>0.0%st:  超线程开启时候, 线程等待另外一个虚拟核完成任务的时间百分比</li>
-</ul>
-<blockquote>
-<p>note：这里显示数据是所有cpu的平均值, 如果想看每一个cpu的处理情况, 按1即可；折叠, 再次按1</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/24/linux-system-profile-command/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/24/linux-system-profile-command/" rel="next" title="Linux 系统优化指令杂记">
+                <i class="fa fa-chevron-left"></i> Linux 系统优化指令杂记
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/linux-command-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/linux-command-note/" itemprop="url">
-                  linux 命令助记
-                </a>
-              
+          <div class="post-nav-prev post-nav-item">
             
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 11:02:31" itemprop="dateCreated datePublished" datetime="2018-09-24T11:02:31+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-05 16:17:04" itemprop="dateModified" datetime="2018-10-05T16:17:04+08:00">2018-10-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/linux-command-note/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/linux-command-note/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/linux-command-note/" class="leancloud_visitors" data-flag-title="linux 命令助记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="print-all-system-information"><a href="#print-all-system-information" class="headerlink" title="print all system information"></a>print all system information</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
-<h3 id="kernel-version"><a href="#kernel-version" class="headerlink" title="kernel version:"></a>kernel version:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
-<h3 id="see-hardware-info"><a href="#see-hardware-info" class="headerlink" title="see hardware info."></a>see hardware info.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
-<h3 id="count-line"><a href="#count-line" class="headerlink" title="count line"></a>count line</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &apos;\*.c&apos; | xargs wc -l &#123;&#125;\;</span><br></pre></td></tr></table></figure>
-<h3 id="yum-remove-without-dependency"><a href="#yum-remove-without-dependency" class="headerlink" title="yum remove without dependency"></a>yum remove without dependency</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -e --nodeps vim-common-7.4.160-1.el7.x86_64</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/24/linux-command-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/updns-qps-tracing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/updns-qps-tracing/" itemprop="url">
-                  updns QPS 异常问题排查
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 10:46:32 / 修改时间：10:51:22" itemprop="dateCreated datePublished" datetime="2018-09-24T10:46:32+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/updns-qps-tracing/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/updns-qps-tracing/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/updns-qps-tracing/" class="leancloud_visitors" data-flag-title="updns QPS 异常问题排查">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="环境问题排查"><a href="#环境问题排查" class="headerlink" title="环境问题排查"></a>环境问题排查</h2><ul>
-<li>系统: 系统版本, 内核版本</li>
-<li>cpu: 物理核心数, 物理核数,逻辑核数</li>
-<li>内存: 内存大小</li>
-<li>网卡: 网卡是否是万兆, 驱动型号</li>
-</ul>
-<h2 id="updns-版本确认（排查是否最近代码导致）"><a href="#updns-版本确认（排查是否最近代码导致）" class="headerlink" title="updns 版本确认（排查是否最近代码导致）"></a>updns 版本确认（排查是否最近代码导致）</h2><ul>
-<li>以前压测过的版本回退 v0.03</li>
-<li>使用最近版本测试</li>
-</ul>
-<h2 id="系统各种参数优化确认"><a href="#系统各种参数优化确认" class="headerlink" title="系统各种参数优化确认"></a>系统各种参数优化确认</h2><ul>
-<li>sendmmsg recvmmsg</li>
-<li>多线程发包</li>
-<li>so_reuseport</li>
-<li>绑定网卡亲缘性</li>
-<li>系统参数调优化</li>
-<li>查看软件终端, 查看 cpu 绑定是否生效</li>
-</ul>
-<h2 id="使用系统工具确认压测机器是否正常"><a href="#使用系统工具确认压测机器是否正常" class="headerlink" title="使用系统工具确认压测机器是否正常"></a>使用系统工具确认压测机器是否正常</h2><ul>
-<li>iperf 网络ok, 吞吐量OK, QPS: 60s  400W QPS, 800Mb/s</li>
-<li>udp sender 查看发包 80w/s, 系统占用低</li>
-<li>perf spin_irq_lock 60%</li>
-<li>查看网卡的收包, 接包, 丢包情况</li>
-</ul>
-<h2 id="被测端和压测端的情况"><a href="#被测端和压测端的情况" class="headerlink" title="被测端和压测端的情况"></a>被测端和压测端的情况</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1373,1122 +813,25 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/nginx-server-locaton-re-match/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/nginx-server-locaton-re-match/" itemprop="url">
-                  nginx server locaton 匹配顺序
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 10:40:52 / 修改时间：10:44:57" itemprop="dateCreated datePublished" datetime="2018-09-24T10:40:52+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/nginx-server-locaton-re-match/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/nginx-server-locaton-re-match/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/nginx-server-locaton-re-match/" class="leancloud_visitors" data-flag-title="nginx server locaton 匹配顺序">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="server-name"><a href="#server-name" class="headerlink" title="server name"></a>server name</h2><ol>
-<li>完全匹配</li>
-<li>通配符在前面，<code>*.tesetwb.com</code></li>
-<li>通配符在后面，<code>www.testwb.*</code></li>
-<li>正则表达式匹配 <code>(.*)?anyfeel.cn</code></li>
-</ol>
-<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><ol>
-<li>完全匹配，<code>=</code> or <code>/</code></li>
-<li>大小写敏感，<code>~</code></li>
-<li>大小写不敏感，<code>~*</code></li>
-<li>前半部分匹配，<code>^~</code></li>
-<li>@location, 表示只能用于 nginx 内部跳转</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/nginx-module-init/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/nginx-module-init/" itemprop="url">
-                  Nginx 模块初始化过程
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 09:50:39" itemprop="dateCreated datePublished" datetime="2018-09-24T09:50:39+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-05 16:17:27" itemprop="dateModified" datetime="2018-10-05T16:17:27+08:00">2018-10-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/nginx-module-init/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/nginx-module-init/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/nginx-module-init/" class="leancloud_visitors" data-flag-title="Nginx 模块初始化过程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="初始化核心函数"><a href="#初始化核心函数" class="headerlink" title="初始化核心函数"></a>初始化核心函数</h2><p><code>ngx_init_cycle()(ngx_cycle.c:275)</code> -&gt; <code>ngx_conf_parse()(ngx_conf_file.c:)</code> -&gt; <code>ngx_conf_handler()</code></p>
-<h2 id="初始化步骤"><a href="#初始化步骤" class="headerlink" title="初始化步骤"></a>初始化步骤</h2><ul>
-<li>modules 和序号绑定关系<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ngx_int_t</span><br><span class="line">ngx_preinit_modules(void)</span><br><span class="line">&#123;</span><br><span class="line">    ngx_uint_t  i;</span><br><span class="line"></span><br><span class="line">    for (i = 0; ngx_modules[i]; i++) &#123;</span><br><span class="line">        ngx_modules[i]-&gt;index = i;</span><br><span class="line">        ngx_modules[i]-&gt;name = ngx_module_names[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ngx_modules_n = i;</span><br><span class="line">    ngx_max_module = ngx_modules_n + NGX_MAX_DYNAMIC_MODULES;</span><br><span class="line"></span><br><span class="line">    return NGX_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/24/nginx-module-init/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/24/tcp-connection-status/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/tcp-connection-status/" itemprop="url">
-                  TCP 连接状态整理
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-24 09:41:42" itemprop="dateCreated datePublished" datetime="2018-09-24T09:41:42+08:00">2018-09-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-05 16:16:11" itemprop="dateModified" datetime="2018-10-05T16:16:11+08:00">2018-10-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/tcp-connection-status/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/24/tcp-connection-status/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/24/tcp-connection-status/" class="leancloud_visitors" data-flag-title="TCP 连接状态整理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ol>
-<li>五层架构与七层架构</li>
-<li>链路层作用 ARP，以太网包格式</li>
-<li>IP/TCP 格式</li>
-<li>TCP 状态机及常用的错误码，time_wait 相关系，SO_RESUSEADDR 作用。</li>
-<li>NAGEL 算法(TCP_NODELAY关闭NAGEL)滑动窗口拥塞避免（慢启动），快速重传与快速恢复，选择重传</li>
-<li>四种定时器的作用 ACK 定时器，persist 定时器，keep-alive 定时器，2MSL 定时器</li>
-<li>使用 TCPDUMP 和应用程序分析 TCP 状态机</li>
-</ol>
-<blockquote>
-<p>note:so_linger 作用： 发送 RST 包来断开连接，而不是发送 FIN.</p>
-</blockquote>
-<h2 id="connect-resty-by-peer"><a href="#connect-resty-by-peer" class="headerlink" title="connect resty by peer"></a>connect resty by peer</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>本端向对端发送数据，但对端无法识别该连接，返回一个 RST 强制关闭连接</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/24/tcp-connection-status/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/adjust-disk-partition-size/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/adjust-disk-partition-size/" itemprop="url">
-                  Linux 磁盘调整
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-23 21:19:50 / 修改时间：21:27:49" itemprop="dateCreated datePublished" datetime="2018-09-23T21:19:50+08:00">2018-09-23</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/23/adjust-disk-partition-size/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/23/adjust-disk-partition-size/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/23/adjust-disk-partition-size/" class="leancloud_visitors" data-flag-title="Linux 磁盘调整">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="磁盘工具"><a href="#磁盘工具" class="headerlink" title="磁盘工具"></a>磁盘工具</h3><ul>
-<li>parted/fdisk/gdisk/ blkid</li>
-</ul>
-<p>note:</p>
-<ul>
-<li>注意区分 PARTUUID 和 UUID</li>
-<li>gdisk sort 可以调整分区序号</li>
-</ul>
-<h3 id="磁盘格式化"><a href="#磁盘格式化" class="headerlink" title="磁盘格式化"></a>磁盘格式化</h3><ul>
-<li>EFI 分区格式化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sdxY -&gt; EFI 分区格式化</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果没有 mkfs.fat 则安装 dosfstools</p>
-<ul>
-<li>分区格式化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda1</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="磁盘启动管理"><a href="#磁盘启动管理" class="headerlink" title="磁盘启动管理"></a>磁盘启动管理</h3><ul>
-<li><p>安装 bootctl</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bootctl —path=/mnt/boot install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>增加磁盘启动选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/boot/loader/entries/arch.conf</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这里写入的是 root 分区的 PARTUUID</p>
-<h3 id="磁盘分区大小调整-resize"><a href="#磁盘分区大小调整-resize" class="headerlink" title="磁盘分区大小调整(resize)"></a>磁盘分区大小调整(resize)</h3><ul>
-<li>先删除原有分区，然后再重新建立（启动区块号不能变，否则会丢失数据）</li>
-<li>使用 resize2fs /dev/sda1 来重新调整分区大小</li>
-<li>最后需要解决  EFI loader 中 PARTUUID，PARTUUID 可能会有变更</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/deploy-python-program-by-pyenv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/deploy-python-program-by-pyenv/" itemprop="url">
-                  使用 pyenv 构建线上 python 环境
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-23 18:34:44 / 修改时间：19:25:56" itemprop="dateCreated datePublished" datetime="2018-09-23T18:34:44+08:00">2018-09-23</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/23/deploy-python-program-by-pyenv/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/23/deploy-python-program-by-pyenv/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/23/deploy-python-program-by-pyenv/" class="leancloud_visitors" data-flag-title="使用 pyenv 构建线上 python 环境">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用-pyenv-部署-python-线上环境"><a href="#使用-pyenv-部署-python-线上环境" class="headerlink" title="使用 pyenv 部署 python 线上环境"></a>使用 pyenv 部署 python 线上环境</h2><p>当生产服务器因权限问题或者系统版本阉割出现 python 依赖问题时，可以使用 <a href="https://github.com/yyuu/pyenv" target="_blank" rel="noopener">pyenv</a></p>
-<h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><ol>
-<li><p>下载 pyenv.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv.git ~/.pyenv</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置<code>PYENV_ROOT</code> 为 <code>pyenv</code> 安装路径, 添加 <code>$PYENV_ROOT/bin</code> 至环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ echo &apos;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">$ echo &apos;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开启 <code>pyenv</code> <code>shims</code> 和自动补全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo &apos;eval &quot;$(pyenv init -)&quot;&apos; &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启 shell 让 <code>pyenv</code> 生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ exec $SHELL</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装需要的 python 版本 至 $PYENV_ROOT/versions 目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install 2.7.8</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="pyenv-常用命令"><a href="#pyenv-常用命令" class="headerlink" title="pyenv 常用命令"></a>pyenv 常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 2.7.5</span><br><span class="line">pyenv versions</span><br><span class="line">pyenv version</span><br><span class="line">pyenv local 2.7.5</span><br><span class="line">pyenv shell 2.7.5</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/run-nsq-by-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="anyfeel">
-      <meta itemprop="description" content="我就是我，是颜色不一样的烟花">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="冰澜">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/run-nsq-by-docker/" itemprop="url">
-                  run nsq by docker
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-23 18:27:58" itemprop="dateCreated datePublished" datetime="2018-09-23T18:27:58+08:00">2018-09-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-05 16:15:20" itemprop="dateModified" datetime="2018-10-05T16:15:20+08:00">2018-10-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/23/run-nsq-by-docker/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/23/run-nsq-by-docker/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/23/run-nsq-by-docker/" class="leancloud_visitors" data-flag-title="run nsq by docker">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="components"><a href="#components" class="headerlink" title="components"></a>components</h1><h2 id="nsqd"><a href="#nsqd" class="headerlink" title="nsqd"></a>nsqd</h2><p>nsqd is the daemon that receives, queues, and delivers messages to clients.<br>two tcp ports: one for clients and one for HTTP API</p>
-<h2 id="nsqlookupd"><a href="#nsqlookupd" class="headerlink" title="nsqlookupd"></a>nsqlookupd</h2><p>the daemon that manages topology information.<br>Clients query nsqlookupd to discover nsqd producers for a specific topic and nsqd nodes broadcasts topic and channel information.<br>two interfaces: A TCP interface which is used by nsqd for broadcasts and an HTTP interface for clients to perform discovery and administrative actions.</p>
-<h2 id="nsqadmin"><a href="#nsqadmin" class="headerlink" title="nsqadmin"></a>nsqadmin</h2><p>Web UI to view aggregated cluster stats in realtime and perform various administrative tasks</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/23/run-nsq-by-docker/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -2509,8 +852,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2582,6 +934,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-发展起源"><span class="nav-number">2.</span> <span class="nav-text">OpenResty 发展起源 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-之-lua-编程"><span class="nav-number">3.</span> <span class="nav-text">OpenResty 之 lua 编程 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-简介"><span class="nav-number">3.1.</span> <span class="nav-text">lua 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-基础数据类型"><span class="nav-number">3.2.</span> <span class="nav-text">lua 基础数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nil"><span class="nav-number">3.2.1.</span> <span class="nav-text">nil</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boolean-true-false"><span class="nav-number">3.3.</span> <span class="nav-text">boolean (true/false)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#number"><span class="nav-number">3.4.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string"><span class="nav-number">3.5.</span> <span class="nav-text">string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table-数组、字典"><span class="nav-number">3.6.</span> <span class="nav-text">table (数组、字典)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function"><span class="nav-number">3.7.</span> <span class="nav-text">function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-表达式"><span class="nav-number">3.8.</span> <span class="nav-text">lua 表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-流程控制"><span class="nav-number">3.9.</span> <span class="nav-text">lua 流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if-else-elseif"><span class="nav-number">3.9.1.</span> <span class="nav-text">if/else/elseif</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while"><span class="nav-number">3.9.2.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat"><span class="nav-number">3.9.3.</span> <span class="nav-text">repeat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-break"><span class="nav-number">3.9.4.</span> <span class="nav-text">for/break</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#return"><span class="nav-number">3.9.5.</span> <span class="nav-text">return</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-模块编写"><span class="nav-number">4.</span> <span class="nav-text">OpenResty 模块编写 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-核心原理"><span class="nav-number">5.</span> <span class="nav-text">OpenResty 核心原理 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-进程模型"><span class="nav-number">5.1.</span> <span class="nav-text">nginx 进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-请求处理流程"><span class="nav-number">5.2.</span> <span class="nav-text">nginx 请求处理流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-事件机制"><span class="nav-number">5.3.</span> <span class="nav-text">nginx 事件机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-协程"><span class="nav-number">5.4.</span> <span class="nav-text">lua 协程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#coroutine-create-f"><span class="nav-number">5.4.1.</span> <span class="nav-text">coroutine.create(f)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#coroutine-resume-co-val1-…"><span class="nav-number">5.4.2.</span> <span class="nav-text">coroutine.resume(co, [, val1, …])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#coroutine-yield-…"><span class="nav-number">5.4.3.</span> <span class="nav-text">coroutine.yield(…)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#coroutine-status-co"><span class="nav-number">5.4.4.</span> <span class="nav-text">coroutine.status(co)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协程实例-生产者消费者"><span class="nav-number">5.4.5.</span> <span class="nav-text">协程实例(生产者消费者)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-与-c-堆栈交互"><span class="nav-number">5.5.</span> <span class="nav-text">lua 与 c 堆栈交互</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-调用-lua"><span class="nav-number">5.5.1.</span> <span class="nav-text">C 调用 lua</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lua-调用-c"><span class="nav-number">5.5.2.</span> <span class="nav-text">lua 调用 c</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lua-协程与-nginx-事件机制结合"><span class="nav-number">5.6.</span> <span class="nav-text">lua 协程与 nginx 事件机制结合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-hooks-编程钩子"><span class="nav-number">6.</span> <span class="nav-text">OpenResty hooks (编程钩子) </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init-by-lua"><span class="nav-number">6.1.</span> <span class="nav-text">init_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#init-worker-by-lua"><span class="nav-number">6.2.</span> <span class="nav-text">init_worker_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rewrite-by-lua"><span class="nav-number">6.3.</span> <span class="nav-text">rewrite_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#access-by-lua"><span class="nav-number">6.4.</span> <span class="nav-text">access_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#content-by-lua"><span class="nav-number">6.5.</span> <span class="nav-text">content_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#banalce-by-lua"><span class="nav-number">6.6.</span> <span class="nav-text">banalce_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#body-filter-by-lua"><span class="nav-number">6.7.</span> <span class="nav-text">body_filter_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#header-filter-by-lua"><span class="nav-number">6.8.</span> <span class="nav-text">header_filter_by_lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-by-lua"><span class="nav-number">6.9.</span> <span class="nav-text">log_by_lua</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-之-lua-编写常见陷阱"><span class="nav-number">7.</span> <span class="nav-text">OpenResty 之 lua 编写常见陷阱 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenResty-编程优化"><span class="nav-number">8.</span> <span class="nav-text">OpenResty 编程优化 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-易混易错配置说明"><span class="nav-number">9.</span> <span class="nav-text">nginx 易混易错配置说明 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#so-keepalive"><span class="nav-number">9.1.</span> <span class="nav-text">so_keepalive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sendfile-directio"><span class="nav-number">9.2.</span> <span class="nav-text">sendfile/directio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-request-buffering"><span class="nav-number">9.3.</span> <span class="nav-text">proxy_request_buffering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-buffer-size"><span class="nav-number">9.4.</span> <span class="nav-text">proxy_buffer_size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-buffers"><span class="nav-number">9.5.</span> <span class="nav-text">proxy_buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-buffering"><span class="nav-number">9.6.</span> <span class="nav-text">proxy_buffering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-busy-size"><span class="nav-number">9.7.</span> <span class="nav-text">proxy_busy_size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keepalive"><span class="nav-number">9.8.</span> <span class="nav-text">keepalive</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-维护与更新"><span class="nav-number">10.</span> <span class="nav-text">nginx 维护与更新  </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stop-vs-quit"><span class="nav-number">10.1.</span> <span class="nav-text">stop vs quit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reload"><span class="nav-number">10.2.</span> <span class="nav-text">reload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reopen"><span class="nav-number">10.3.</span> <span class="nav-text">reopen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hot-update"><span class="nav-number">10.4.</span> <span class="nav-text">hot update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">10.5.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2739,6 +1107,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
 
   
 
@@ -2753,6 +1125,23 @@
     <script id="dsq-count-scr" src="https://anyfeel-cn.disqus.com/count.js" async></script>
   
 
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/10/31/OpenResty-Best-Practice/';
+        this.page.identifier = '2018/10/31/OpenResty-Best-Practice/';
+        this.page.title = 'OpenResty Best Practice';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://anyfeel-cn.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 
@@ -3112,43 +1501,40 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -3168,9 +1554,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });
